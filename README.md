@@ -10,7 +10,7 @@ Cool libraries and components for angular.
 
 # Libraries
 
-##[@angular-cool/storage](/projects/storage/README.md) 
+## [@angular-cool/storage](/projects/storage/README.md) 
 [![NPM version][storage-npm-image]][storage-npm-url] [![Downloads][storage-downloads-image]][storage-npm-url]  [![Total Downloads][storage-total-downloads-image]][storage-npm-url]
 
 Cool angular wrapper for LocalStorage and SessionStorage with Universal support
