@@ -1,27 +1,16 @@
-# AngularCool
+[storage-npm-url]: https://npmjs.org/package/@angular-cool/storage
+[storage-npm-image]: https://img.shields.io/npm/v/@angular-cool/storage.svg
+[storage-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/storage.svg
+[storage-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/storage.svg
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
-## Development server
+# Angular Cool
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Cool libraries and components for angular.
 
-## Code scaffolding
+# Libraries
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+##[@angular-cool/storage](/projects/storage/README.md) 
+[![NPM version][storage-npm-image]][storage-npm-url] [![Downloads][storage-downloads-image]][storage-npm-url]  [![Total Downloads][storage-total-downloads-image]][storage-npm-url]
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Cool angular wrapper for LocalStorage and SessionStorage with Universal support

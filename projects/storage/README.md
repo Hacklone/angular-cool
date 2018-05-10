@@ -1,10 +1,10 @@
-[npm-url]: https://npmjs.org/package/angular2-cool-storage
-[npm-image]: https://img.shields.io/npm/v/angular2-cool-storage.svg
-[downloads-image]: https://img.shields.io/npm/dm/angular2-cool-storage.svg
-[total-downloads-image]: https://img.shields.io/npm/dt/angular2-cool-storage.svg
+[npm-url]: https://npmjs.org/package/@angular-cool/storage
+[npm-image]: https://img.shields.io/npm/v/@angular-cool/storage.svg
+[downloads-image]: https://img.shields.io/npm/dm/@angular-cool/storage.svg
+[total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/storage.svg
 
-# angular2-cool-storage [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
-Cool angular2 wrapper for LocalStorage and SessionStorage
+# @angular-cool/storage [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
+Cool angular wrapper for LocalStorage and SessionStorage with Universal support
 
 ## Install 
 > npm install --save @angular-cool/storage
