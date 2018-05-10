@@ -1,0 +1,42 @@
+{
+  "name": "@angular-cool/storage",
+  "version": "1.0.0",
+  "description": "Cool Storage wrapper for angular.",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0",
+    "rxjs": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/angular-cool.git"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "local-storage",
+    "localStorage",
+    "session-storage",
+    "sessionStorage",
+    "global",
+    "wrapper",
+    "cool",
+    "cool-local-storage",
+    "cool-session-storage",
+    "CoolLocalStorage",
+    "CoolSessionStorage",
+    "Universal"
+  ],
+  "author": "Hacklone <toakak@gmail.com>",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/angular-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/angular-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/angular-cool/projects/storage#readme"
+}
