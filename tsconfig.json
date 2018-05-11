@@ -19,6 +19,9 @@
     "paths": {
       "angular-cool-storage": [
         "dist/angular-cool-storage"
+      ],
+      "http": [
+        "dist/http"
       ]
     }
   }
