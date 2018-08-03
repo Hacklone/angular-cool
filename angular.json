@@ -82,6 +82,46 @@
           }
         }
       }
+    },
+    "dialogs": {
+      "root": "projects/dialogs",
+      "sourceRoot": "projects/dialogs/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/dialogs/tsconfig.lib.json",
+            "project": "projects/dialogs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/dialogs/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dialogs/src/test.ts",
+            "tsConfig": "projects/dialogs/tsconfig.spec.json",
+            "karmaConfig": "projects/dialogs/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dialogs/tsconfig.lib.json",
+              "projects/dialogs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-cool"

@@ -1,0 +1,41 @@
+mat-dialog-actions {
+  button {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.px-2 {
+  padding-right: 0.5rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.bg-secondary {
+  background-color: #6c757d;
+}
+
+.text-warning {
+  color: #ffc107;
+}

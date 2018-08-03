@@ -22,6 +22,9 @@
       ],
       "http": [
         "dist/http"
+      ],
+      "dialogs": [
+        "dist/dialogs"
       ]
     }
   }
