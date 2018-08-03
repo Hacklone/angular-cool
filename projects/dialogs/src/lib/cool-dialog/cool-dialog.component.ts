@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CoolDialogResult } from './cool-dialog-result.interface';
+import { CoolDialogResult } from '../cool-dialog-result.interface';
 import { CoolDialogConfig } from '../cool-dialog-config.interface';
 
 @Component({

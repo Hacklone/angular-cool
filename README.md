@@ -8,6 +8,11 @@
 [http-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/http.svg
 [http-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/http.svg
 
+[dialogs-npm-url]: https://npmjs.org/package/@angular-cool/dialogs
+[dialogs-npm-image]: https://img.shields.io/npm/v/@angular-cool/dialogs.svg
+[dialogs-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/dialogs.svg
+[dialogs-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/dialogs.svg
+
 # Angular Cool
 
 Cool libraries and components for angular.
@@ -23,3 +28,8 @@ Cool angular wrapper for LocalStorage and SessionStorage with Universal support
 [![NPM version][http-npm-image]][http-npm-url] [![Downloads][http-downloads-image]][http-npm-url]  [![Total Downloads][http-total-downloads-image]][http-npm-url]
 
 Cool features over angular HttpClient
+
+## [@angular-cool/dialogs](/projects/dialogs/README.md) 
+[![NPM version][dialogs-npm-image]][dialogs-npm-url] [![Downloads][dialogs-downloads-image]][dialogs-npm-url]  [![Total Downloads][dialogs-total-downloads-image]][dialogs-npm-url]
+
+Cool dialogs for angular
