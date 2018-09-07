@@ -1,0 +1,48 @@
+<div class="inline-edit-field"
+     [class.no-value]="!innerValue"
+     [class.show-indicator]="!hideIndicator"
+     [class.editable]="!isDisabled"
+     [style.min-width.px]="width"
+     [style.height.px]="height"
+     [style.font-size]="fontSize"
+     (click)="startEdit()">
+
+  <div id="edit-container" *ngIf="isEditing">
+    <input placeholder="{{ placeholder }}"
+           type="{{ type || 'text' }}"
+           (focusout)="onInputFocusout()"
+           (keyup)="onFieldKeyUp($event.keyCode)"
+           [value]="innerValue"
+           (input)="writeValue($event.target.value)"
+           class="input-field"
+           coolInlineEditFieldInput>
+
+    <div id="save-button" class="edit-button hover-strong" (click)="stopEditing(); $event.stopPropagation()">
+      <div class="full-relative">
+        <fa name="check" title="Save" class="horizontal-center"></fa>
+      </div>
+    </div>
+
+    <div id="cancel-button" class="edit-button hover-strong" (click)="cancelEditing(); $event.stopPropagation()">
+      <div class="full-relative">
+        <fa name="times" title="Cancel" class="horizontal-center"></fa>
+      </div>
+    </div>
+  </div>
+
+  <div id="saved-container" *ngIf="!isEditing">
+    <div #saveContentRef>
+      <ng-content select="[savedContent]"></ng-content>
+    </div>
+
+    <div *ngIf="!saveContentRef.innerHTML.trim()">
+      {{ innerValue || emptyText || placeholder || 'N/A' }}
+    </div>
+
+    <div id="edit-indicator">
+      <div class="full-relative">
+        <fa name="pencil" title="Edit" class="horizontal-center"></fa>
+      </div>
+    </div>
+  </div>
+</div>

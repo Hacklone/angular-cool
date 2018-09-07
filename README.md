@@ -13,6 +13,11 @@
 [dialogs-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/dialogs.svg
 [dialogs-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/dialogs.svg
 
+[inline-edit-field-npm-url]: https://npmjs.org/package/@angular-cool/inline-edit-field
+[inline-edit-field-npm-image]: https://img.shields.io/npm/v/@angular-cool/inline-edit-field.svg
+[inline-edit-field-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/inline-edit-field.svg
+[inline-edit-field-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/inline-edit-field.svg
+
 # Angular Cool
 
 Cool libraries and components for angular.
@@ -33,3 +38,8 @@ Cool features over angular HttpClient
 [![NPM version][dialogs-npm-image]][dialogs-npm-url] [![Downloads][dialogs-downloads-image]][dialogs-npm-url]  [![Total Downloads][dialogs-total-downloads-image]][dialogs-npm-url]
 
 Cool dialogs for angular
+
+## [@angular-cool/inline-edit-field](/projects/inline-edit-field/README.md) 
+[![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]
+
+Cool inline edit field for angular

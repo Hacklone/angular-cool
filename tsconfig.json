@@ -25,6 +25,9 @@
       ],
       "dialogs": [
         "dist/dialogs"
+      ],
+      "inline-edit-field": [
+        "dist/inline-edit-field"
       ]
     }
   }
