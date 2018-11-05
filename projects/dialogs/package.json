@@ -1,13 +1,13 @@
 {
   "name": "@angular-cool/dialogs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cool dialogs for angular.",
   "peerDependencies": {
     "rxjs": "^6.0.0",
-    "@angular/common": "^6.0.0",
-    "@angular/core": "^6.0.0",
-    "@angular/material": "^6.0.0",
-    "@angular/cdk": "^6.0.0"
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/material": "^7.0.0",
+    "@angular/cdk": "^7.0.0"
   },
   "repository": {
     "type": "git",

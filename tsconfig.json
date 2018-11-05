@@ -28,6 +28,12 @@
       ],
       "inline-edit-field": [
         "dist/inline-edit-field"
+      ],
+      "loading-indicator": [
+        "dist/loading-indicator"
+      ],
+      "loading-indicator/*": [
+        "dist/loading-indicator/*"
       ]
     }
   }

@@ -1,12 +1,11 @@
 {
-  "name": "@angular-cool/inline-edit-field",
-  "version": "1.0.1",
-  "description": "Cool inline edit field for angular",
+  "name": "@angular-cool/loading-indicator",
+  "version": "1.1.0",
+  "description": "Cool loading indicator for angular",
   "peerDependencies": {
-    "rxjs": "^6.3.3",
-    "@angular/common": "~7.0.0",
-    "@angular/core": "~7.0.0",
-    "angular2-fontawesome": "^5.2.1"
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular-cool/http": "^1.0.1"
   },
   "repository": {
     "type": "git",
@@ -15,9 +14,9 @@
   "keywords": [
     "angular2",
     "angular",
-    "inline",
-    "edit",
-    "field"
+    "loading",
+    "indicator",
+    "http"
   ],
   "author": "Hacklone <toakak@gmail.com>",
   "license": "MIT",
@@ -30,5 +29,5 @@
   "bugs": {
     "url": "https://github.com/Hacklone/angular-cool/issues"
   },
-  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/inline-edit-field/README.md"
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/loading-indicator/README.md"
 }

@@ -6,7 +6,7 @@ import { CoolServerStorage } from './cool-server-storage';
 
 @Injectable()
 export class CoolLocalStorage extends CoolStorageBase {
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) platformId: any) {
     if (isPlatformBrowser(platformId)) {
       super(window.localStorage, 'LocalStorage');
     } else {
