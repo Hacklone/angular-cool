@@ -7,8 +7,7 @@ import { IRequestInterceptor } from './request-interceptor.interface';
 import { IResponseInterceptor } from './response-interceptor.interface';
 import { HttpError } from './http-error.model';
 import { DEFAULT_REQUEST_OPTIONS, RequestOptions } from './request-options.interface';
-import { Observable } from 'rxjs';
-import { from } from 'rxjs';
+import { Observable ,  from } from 'rxjs';
 
 export interface Func<T, T1, T2, TResult> {
   (item: T, item1: T1, item2: T2): TResult;
