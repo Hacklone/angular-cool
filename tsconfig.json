@@ -34,6 +34,12 @@
       ],
       "loading-indicator/*": [
         "dist/loading-indicator/*"
+      ],
+      "wizard": [
+        "dist/wizard"
+      ],
+      "wizard/*": [
+        "dist/wizard/*"
       ]
     }
   }

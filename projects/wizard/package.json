@@ -1,0 +1,30 @@
+{
+  "name": "@angular-cool/wizard",
+  "version": "1.0.0",
+  "description": "Cool generic wizard component for angular",
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/angular-cool.git"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "wizard"
+  ],
+  "author": "Hacklone <toakak@gmail.com>",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/angular-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/angular-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/wizard/README.md"
+}
