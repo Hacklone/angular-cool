@@ -1,10 +1,10 @@
 {
   "name": "@angular-cool/storage",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cool Storage wrapper for angular.",
   "peerDependencies": {
-    "@angular/common": "~7.0.0",
-    "@angular/core": "~7.0.0",
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
     "rxjs": "^6.3.3"
   },
   "repository": {
