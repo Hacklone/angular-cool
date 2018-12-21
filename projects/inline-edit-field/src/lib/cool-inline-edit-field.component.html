@@ -17,15 +17,15 @@
            class="input-field"
            coolInlineEditFieldInput>
 
-    <div id="save-button" class="edit-button hover-strong" (click)="stopEditing(); $event.stopPropagation()">
+    <div id="save-button" class="edit-button hover-strong" title="Save" (click)="stopEditing(); $event.stopPropagation()">
       <div class="full-relative">
-        <fa name="check" title="Save" class="horizontal-center"></fa>
+        <fa-icon icon="check" class="horizontal-center"></fa-icon>
       </div>
     </div>
 
-    <div id="cancel-button" class="edit-button hover-strong" (click)="cancelEditing(); $event.stopPropagation()">
+    <div id="cancel-button" class="edit-button hover-strong" title="Cancel" (click)="cancelEditing(); $event.stopPropagation()">
       <div class="full-relative">
-        <fa name="times" title="Cancel" class="horizontal-center"></fa>
+        <fa-icon icon="times"  class="horizontal-center"></fa-icon>
       </div>
     </div>
   </div>
@@ -40,8 +40,8 @@
     </div>
 
     <div id="edit-indicator">
-      <div class="full-relative">
-        <fa name="pencil" title="Edit" class="horizontal-center"></fa>
+      <div class="full-relative" title="Edit">
+        <fa-icon icon="pencil-alt" class="horizontal-center"></fa-icon>
       </div>
     </div>
   </div>
