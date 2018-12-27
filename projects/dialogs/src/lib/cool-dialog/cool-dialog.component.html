@@ -12,12 +12,11 @@
              [(ngModel)]="confirmInput"
              matInput
              placeholder="Write '{{ textConfirmation }}' to enable confirm button">
-    </mat-form-field>
-  </div>
+    </mat-form-field>0</div>
 </div>
 
 <div mat-dialog-actions>
-  <div class="w-100 text-right">
+  <div class="w-100 text-right mt-3">
     <button *ngIf="showCancelActionButton"
             (click)="onCancelClick()"
             mat-raised-button
