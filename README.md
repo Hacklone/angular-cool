@@ -43,3 +43,8 @@ Cool dialogs for angular
 [![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]
 
 Cool inline edit field for angular
+
+## [@angular-cool/virtual-grid](/projects/virtual-grid/README.md) 
+[![NPM version][virtual-grid-npm-image]][virtual-grid-npm-url] [![Downloads][virtual-grid-downloads-image]][virtual-grid-npm-url]  [![Total Downloads][virtual-grid-total-downloads-image]][virtual-grid-npm-url]
+
+Cool virtual scroll grid for angular

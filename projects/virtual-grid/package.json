@@ -1,0 +1,31 @@
+{
+  "name": "@angular-cool/virtual-grid",
+  "version": "1.0.0",
+  "description": "Cool virtual scroll grid for angular",
+  "peerDependencies": {
+    "@angular/core": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/angular-cool.git"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "virtual",
+    "grid",
+    "scroll"
+  ],
+  "author": "Hacklone <toakak@gmail.com>",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/angular-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/angular-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/virtual-grid/README.md"
+}

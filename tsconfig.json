@@ -34,6 +34,12 @@
       ],
       "loading-indicator/*": [
         "dist/loading-indicator/*"
+      ],
+      "virtual-grid": [
+        "dist/virtual-grid"
+      ],
+      "virtual-grid/*": [
+        "dist/virtual-grid/*"
       ]
     }
   }
