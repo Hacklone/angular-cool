@@ -3,8 +3,8 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  HostListener,
   Input,
+  OnDestroy,
   OnInit,
   TemplateRef,
   ViewContainerRef
@@ -12,11 +12,14 @@ import {
 
 import { AsyncIterator } from './async-iterator.interface';
 import { ViewPort } from './view-port';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 const VIEW_PORT_SIZE_MULTIPLIER = 1.5;
 const VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER = 0.4;
 const SCROLL_CONTAINER_ATTRIBUTE_NAME = 'cool-virtual-grid-container';
 const MILLISECONDS_TO_WAIT_ON_SCROLLING_BEFORE_RENDERING = 10;
+const MILLISECONDS_TO_WAIT_ON_WINDOW_RESIZE_BEFORE_RENDERING = 200;
 
 @Component({
   selector: 'cool-virtual-grid',
@@ -31,40 +34,32 @@ const MILLISECONDS_TO_WAIT_ON_SCROLLING_BEFORE_RENDERING = 10;
     :host {
       display: block;
       position: relative;
+
+      text-align: center;
     }
   `]
 })
-export class CoolVirtualGridComponent implements OnInit {
-  private scrollContainer;
+export class CoolVirtualGridComponent implements OnInit, OnDestroy {
+  private _scrollContainer;
 
-  private currentElementHeight: number = 0;
+  private _currentElementHeight: number = 0;
 
-  private itemsPerRow: number;
-  private rowsPerViewPort: number;
-  private itemsPerViewPort: number;
-  private viewPortHeight: number;
+  private _itemsPerRow: number;
+  private _rowsPerViewPort: number;
+  private _itemsPerViewPort: number;
+  private _viewPortHeight: number;
 
-  private topViewPort: ViewPort;
-  private middleViewPort: ViewPort;
-  private bottomViewPort: ViewPort;
+  private _topViewPort: ViewPort;
+  private _middleViewPort: ViewPort;
+  private _bottomViewPort: ViewPort;
 
-  private moveTopBoundary: number;
-  private moveBottomBoundary: number;
+  private _moveTopBoundary: number;
+  private _moveBottomBoundary: number;
 
-  @ContentChild(TemplateRef)
-  private template: TemplateRef<Object>;
+  private _componentDestroyedSubject: Subject<void> = new Subject<void>();
 
-  @HostListener('window:scroll')
-  public scrollHandler() {
-    this.onContainerScroll();
-  }
-
-  @HostListener('window:resize')
-  public resizeHandler() {
-    this.onWindowResize();
-  }
-
-  constructor(private element: ElementRef, private viewContainer: ViewContainerRef) {
+  constructor(private element: ElementRef,
+              private viewContainer: ViewContainerRef) {
   }
 
   @Input()
@@ -79,19 +74,42 @@ export class CoolVirtualGridComponent implements OnInit {
   @Input()
   public itemSpace: number;
 
+  @ContentChild(TemplateRef)
+  public template: TemplateRef<Object>;
+
   public async ngOnInit(): Promise<any> {
     const self = this;
 
     checkInjectedParameters();
 
-    this.scrollContainer = getScrollContainer();
+    this._scrollContainer = getScrollContainer();
 
     this.calculateParameters();
 
-    this.moveTopBoundary = 0;
-    this.moveBottomBoundary = this.viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER);
+    this._moveTopBoundary = 0;
+    this._moveBottomBoundary = this._viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER);
 
     await this.initialRenderAsync();
+
+    const scrollEventSource = this._scrollContainer.tagName === 'HTML' ? window : this._scrollContainer;
+
+    fromEvent(scrollEventSource, 'scroll')
+      .pipe(
+        debounceTime(MILLISECONDS_TO_WAIT_ON_SCROLLING_BEFORE_RENDERING),
+        takeUntil(this._componentDestroyedSubject),
+      )
+      .subscribe(async () => {
+        await this.handleCurrentScroll(this._scrollContainer.scrollTop);
+      });
+
+    fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(MILLISECONDS_TO_WAIT_ON_WINDOW_RESIZE_BEFORE_RENDERING),
+        takeUntil(this._componentDestroyedSubject),
+      )
+      .subscribe(async () => {
+        await this.onWindowResizeAsync();
+      });
 
     function checkInjectedParameters() {
       if (!self.itemIterator) {
@@ -134,8 +152,14 @@ export class CoolVirtualGridComponent implements OnInit {
     }
   }
 
+  public ngOnDestroy() {
+    this._componentDestroyedSubject.next();
+
+    this._componentDestroyedSubject.complete();
+  }
+
   public async reRenderAsync(): Promise<void> {
-    await this.reRenderFromScrollAsync(this.scrollContainer.scrollTop);
+    await this.reRenderFromScrollAsync(this._scrollContainer.scrollTop);
   }
 
   private get visibleItemHeight() {
@@ -146,14 +170,20 @@ export class CoolVirtualGridComponent implements OnInit {
     return (this.itemWidth || 0) + (2 * (this.itemSpace || 0));
   }
 
-  private onWindowResize() {
+  private async onWindowResizeAsync() {
     this.calculateParameters();
 
-    this.reRenderFromScrollAsync(this.scrollContainer.scrollTop);
+    this._setHeightForElement(0);
+
+    await this.reRenderFromScrollAsync(this._scrollContainer.scrollTop);
   }
 
-  private async getItems(fromIndex: number, numberOfItems: number): Promise<any[]> {
+  private async getItemsAsync(fromIndex: number, numberOfItems: number): Promise<any[]> {
     try {
+      if (fromIndex < 0) {
+        fromIndex = 0;
+      }
+
       const result = this.itemIterator.next(fromIndex, numberOfItems);
 
       if (!result) {
@@ -180,60 +210,46 @@ export class CoolVirtualGridComponent implements OnInit {
     const availableWidth = calculateAvailableWidth();
     const availableHeight = calculateAvailableHeight();
 
-    this.viewPortHeight = calculateViewPortHeight();
-    this.rowsPerViewPort = calculateRowsPerViewPort();
-    this.itemsPerRow = calculateItemsPerRow();
-    this.itemsPerViewPort = this.rowsPerViewPort * this.itemsPerRow;
+    this._viewPortHeight = calculateViewPortHeight();
+    this._rowsPerViewPort = calculateRowsPerViewPort();
+    this._itemsPerRow = calculateItemsPerRow();
+    this._itemsPerViewPort = this._rowsPerViewPort * this._itemsPerRow;
 
     function calculateAvailableWidth() {
-      return self.scrollContainer.offsetWidth;
+      return self._scrollContainer.offsetWidth;
     }
 
     function calculateAvailableHeight() {
-      return self.scrollContainer.offsetHeight;
+      return self._scrollContainer.offsetHeight;
     }
 
     function calculateViewPortHeight() {
       const bareHeight = availableHeight * VIEW_PORT_SIZE_MULTIPLIER;
 
-      const rowsFitInHeight = Math.floor(bareHeight / self.visibleItemHeight);
+      const rowsFitInHeight = Math.floor(bareHeight / self.visibleItemHeight) || 0;
 
       return rowsFitInHeight * self.visibleItemHeight;
     }
 
     function calculateRowsPerViewPort() {
-      return self.viewPortHeight / self.visibleItemHeight;
+      return self._viewPortHeight / self.visibleItemHeight;
     }
 
     function calculateItemsPerRow() {
-      return Math.floor(availableWidth / self.visibleItemWidth);
+      return Math.floor(availableWidth / self.visibleItemWidth) || 0;
     }
-  }
-
-  private onContainerScroll() {
-    const currentScrollTop = this.scrollContainer.scrollTop;
-
-    setTimeout(() => {
-      const latestScrollTop = this.scrollContainer.scrollTop;
-
-      if (currentScrollTop !== latestScrollTop) {
-        return;
-      }
-
-      this.handleCurrentScroll(latestScrollTop);
-
-    }, MILLISECONDS_TO_WAIT_ON_SCROLLING_BEFORE_RENDERING);
   }
 
   private async handleCurrentScroll(scrollTop: number): Promise<any> {
-    if (scrollTop > this.bottomViewPort.bottomScrollTop && this.isLastViewPortRendered) {
+    if (scrollTop > this._bottomViewPort.bottomScrollTop && this.isLastViewPortRendered) {
       return;
     }
-    if (scrollTop < this.topViewPort.scrollTop || scrollTop > this.bottomViewPort.bottomScrollTop) {
+
+    if (scrollTop < this._topViewPort.scrollTop || scrollTop > this._bottomViewPort.bottomScrollTop) {
       await this.reRenderFromScrollAsync(scrollTop);
-    } else if (scrollTop < this.moveTopBoundary) {
+    } else if (scrollTop < this._moveTopBoundary) {
       await this.moveUpAsync();
-    } else if (scrollTop > this.moveBottomBoundary) {
+    } else if (scrollTop > this._moveBottomBoundary) {
       await this.moveDownAsync();
     } else {
       return;
@@ -243,32 +259,32 @@ export class CoolVirtualGridComponent implements OnInit {
   }
 
   private calculateMoveBoundaries() {
-    this.moveTopBoundary = this.topViewPort.scrollTop + (this.viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER));
+    this._moveTopBoundary = this._topViewPort.scrollTop + (this._viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER));
 
-    if (this.moveTopBoundary < 0) {
-      this.moveTopBoundary = 0;
+    if (this._moveTopBoundary < 0) {
+      this._moveTopBoundary = 0;
     }
 
     if (this.isLastViewPortRendered) {
-      this.moveBottomBoundary = Infinity;
+      this._moveBottomBoundary = Infinity;
     } else {
-      this.moveBottomBoundary = this.middleViewPort.scrollTop + (this.viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER));
+      this._moveBottomBoundary = this._middleViewPort.scrollTop + (this._viewPortHeight * (1 - VIEW_PORT_MOVE_BOUNDARY_MULTIPLIER));
     }
   }
 
   private get isLastViewPortRendered() {
-    return this.topViewPort.isLastViewPort || this.middleViewPort.isLastViewPort || this.bottomViewPort.isLastViewPort;
+    return this._topViewPort.isLastViewPort || this._middleViewPort.isLastViewPort || this._bottomViewPort.isLastViewPort;
   }
 
   private plannedViewPortScrollTop: number;
 
   private async moveUpAsync(): Promise<void> {
-    const viewPortScrollTop = this.topViewPort.scrollTop - this.viewPortHeight;
-    const fromIndex = this.topViewPort.itemsFromIndex - this.itemsPerViewPort;
+    const viewPortScrollTop = this._topViewPort.scrollTop - this._viewPortHeight;
+    const fromIndex = this._topViewPort.itemsFromIndex - this._itemsPerViewPort;
 
     this.plannedViewPortScrollTop = viewPortScrollTop;
 
-    const viewPortItems = await this.getItems(fromIndex, this.itemsPerViewPort);
+    const viewPortItems = await this.getItemsAsync(fromIndex, this._itemsPerViewPort);
 
     if (this.plannedViewPortScrollTop !== viewPortScrollTop) {
       return;
@@ -287,29 +303,29 @@ export class CoolVirtualGridComponent implements OnInit {
 
     this.renderViewPort(newViewPort);
 
-    const oldBottomViewPort = this.bottomViewPort;
+    const oldBottomViewPort = this._bottomViewPort;
 
-    this.bottomViewPort = this.middleViewPort;
-    this.middleViewPort = this.topViewPort;
-    this.topViewPort = newViewPort;
+    this._bottomViewPort = this._middleViewPort;
+    this._middleViewPort = this._topViewPort;
+    this._topViewPort = newViewPort;
 
     this.destroyViewPort(oldBottomViewPort);
   }
 
   private async moveDownAsync(): Promise<void> {
-    const viewPortScrollTop = this.bottomViewPort.bottomScrollTop;
-    const fromIndex = this.bottomViewPort.itemsFromIndex + this.itemsPerViewPort;
+    const viewPortScrollTop = this._bottomViewPort.bottomScrollTop;
+    const fromIndex = this._bottomViewPort.itemsFromIndex + this._itemsPerViewPort;
 
     this.plannedViewPortScrollTop = viewPortScrollTop;
 
-    const viewPortItems = await this.getItems(fromIndex, this.itemsPerViewPort);
+    const viewPortItems = await this.getItemsAsync(fromIndex, this._itemsPerViewPort);
 
     if (this.plannedViewPortScrollTop !== viewPortScrollTop) {
       return;
     }
 
     if (!viewPortItems || !viewPortItems.length) {
-      this.bottomViewPort.isLastViewPort = true;
+      this._bottomViewPort.isLastViewPort = true;
 
       return;
     }
@@ -318,16 +334,16 @@ export class CoolVirtualGridComponent implements OnInit {
     newViewPort.scrollTop = viewPortScrollTop;
     newViewPort.items = viewPortItems;
     newViewPort.itemsFromIndex = fromIndex;
-    newViewPort.isLastViewPort = viewPortItems.length < this.itemsPerViewPort;
+    newViewPort.isLastViewPort = viewPortItems.length < this._itemsPerViewPort;
     newViewPort.height = this.calculateViewPortHeight(newViewPort.numberOfItems);
 
     this.renderViewPort(newViewPort);
 
-    const oldTopViewPort = this.topViewPort;
+    const oldTopViewPort = this._topViewPort;
 
-    this.topViewPort = this.middleViewPort;
-    this.middleViewPort = this.bottomViewPort;
-    this.bottomViewPort = newViewPort;
+    this._topViewPort = this._middleViewPort;
+    this._middleViewPort = this._bottomViewPort;
+    this._bottomViewPort = newViewPort;
 
     this.destroyViewPort(oldTopViewPort);
   }
@@ -337,16 +353,16 @@ export class CoolVirtualGridComponent implements OnInit {
 
     viewPortElement.classList.add('cool-virtual-grid-view-port');
     viewPortElement.style.top = `${viewPort.scrollTop}px`;
-    viewPortElement.style.height = `${viewPort}px`;
+    viewPortElement.style.height = `${viewPort.height}px`;
+    viewPortElement.style.width = `100%`;
     viewPortElement.style.position = 'absolute';
 
     viewPort.nativeElement = viewPortElement;
 
+    // grow element if needed
     const minimumElementHeight = viewPort.bottomScrollTop;
-    if (minimumElementHeight > this.currentElementHeight) {
-      this.currentElementHeight = minimumElementHeight;
-
-      this.element.nativeElement.style.height = `${this.currentElementHeight}px`;
+    if (minimumElementHeight > this._currentElementHeight) {
+      this._setHeightForElement(minimumElementHeight);
     }
 
     for (let item of viewPort.items) {
@@ -376,12 +392,20 @@ export class CoolVirtualGridComponent implements OnInit {
     this.element.nativeElement.appendChild(viewPort.nativeElement);
   }
 
+  private _setHeightForElement(minimumElementHeight) {
+    this._currentElementHeight = minimumElementHeight;
+
+    this.element.nativeElement.style.height = `${this._currentElementHeight}px`;
+  }
+
   private destroyViewPort(viewPort: ViewPort) {
     for (let item of viewPort.renderedItems) {
       item.destroy();
     }
 
-    this.element.nativeElement.removeChild(viewPort.nativeElement);
+    if (viewPort.nativeElement) {
+      this.element.nativeElement.removeChild(viewPort.nativeElement);
+    }
   }
 
   private async initialRenderAsync(): Promise<any> {
@@ -391,62 +415,69 @@ export class CoolVirtualGridComponent implements OnInit {
   }
 
   private async reRenderFromScrollAsync(scrollTop: number): Promise<void> {
-    const currentViewPortIndex = Math.floor(scrollTop / this.viewPortHeight);
-    const topScrollTop = currentViewPortIndex * this.viewPortHeight;
+    const currentViewPortIndex = Math.floor(scrollTop / this._viewPortHeight) || 0;
+    const topScrollTop = currentViewPortIndex * this._viewPortHeight;
 
-    const fromIndex = currentViewPortIndex * this.itemsPerViewPort;
+    const fromIndex = currentViewPortIndex * this._itemsPerViewPort;
 
-    const viewPortItems = await this.getItems(fromIndex, 3 * this.itemsPerViewPort);
+    const viewPortItems = await this.getItemsAsync(fromIndex, 3 * this._itemsPerViewPort);
 
-    if (this.topViewPort) {
-      this.destroyViewPort(this.topViewPort);
+    // Top ViewPort
+    if (this._topViewPort) {
+      this.destroyViewPort(this._topViewPort);
     }
 
-    this.topViewPort = new ViewPort();
+    this._topViewPort = new ViewPort();
 
-    this.topViewPort.scrollTop = topScrollTop;
-    this.topViewPort.itemsFromIndex = fromIndex;
-    this.topViewPort.items = viewPortItems.slice(0, this.itemsPerViewPort);
-    this.topViewPort.isLastViewPort = this.topViewPort.numberOfItems < this.itemsPerViewPort;
-    this.topViewPort.height = this.calculateViewPortHeight(this.topViewPort.numberOfItems);
+    this._topViewPort.scrollTop = topScrollTop;
+    this._topViewPort.itemsFromIndex = fromIndex;
+    this._topViewPort.items = viewPortItems.slice(0, this._itemsPerViewPort);
+    this._topViewPort.isLastViewPort = this._topViewPort.numberOfItems < this._itemsPerViewPort;
+    this._topViewPort.height = this.calculateViewPortHeight(this._topViewPort.numberOfItems);
 
-    this.renderViewPort(this.topViewPort);
+    this.renderViewPort(this._topViewPort);
 
-    if (this.middleViewPort) {
-      this.destroyViewPort(this.middleViewPort);
+    // Middle ViewPort
+    if (this._middleViewPort) {
+      this.destroyViewPort(this._middleViewPort);
     }
 
-    this.middleViewPort = new ViewPort();
+    this._middleViewPort = new ViewPort();
 
-    this.middleViewPort.scrollTop = topScrollTop + this.viewPortHeight;
-    this.middleViewPort.itemsFromIndex = fromIndex + this.itemsPerViewPort;
-    this.middleViewPort.items = viewPortItems.slice(this.itemsPerViewPort, 2 * this.itemsPerViewPort);
-    this.middleViewPort.isLastViewPort = this.middleViewPort.numberOfItems < this.itemsPerViewPort;
-    this.middleViewPort.height = this.calculateViewPortHeight(this.middleViewPort.numberOfItems);
+    this._middleViewPort.scrollTop = topScrollTop + this._viewPortHeight;
+    this._middleViewPort.itemsFromIndex = fromIndex + this._itemsPerViewPort;
+    this._middleViewPort.items = viewPortItems.slice(this._itemsPerViewPort, 2 * this._itemsPerViewPort);
+    this._middleViewPort.isLastViewPort = this._middleViewPort.numberOfItems < this._itemsPerViewPort;
+    this._middleViewPort.height = this.calculateViewPortHeight(this._middleViewPort.numberOfItems);
 
-    this.renderViewPort(this.middleViewPort);
-
-    if (this.bottomViewPort) {
-      this.destroyViewPort(this.bottomViewPort);
+    if (!this._topViewPort.isLastViewPort) {
+      this.renderViewPort(this._middleViewPort);
     }
 
-    this.bottomViewPort = new ViewPort();
+    // Bottom ViewPort
+    if (this._bottomViewPort) {
+      this.destroyViewPort(this._bottomViewPort);
+    }
 
-    this.bottomViewPort.scrollTop = topScrollTop + (2 * this.viewPortHeight);
-    this.bottomViewPort.itemsFromIndex = fromIndex + (2 * this.itemsPerViewPort);
-    this.bottomViewPort.items = viewPortItems.slice(2 * this.itemsPerViewPort, 3 * this.itemsPerViewPort);
-    this.bottomViewPort.isLastViewPort = this.bottomViewPort.numberOfItems < this.itemsPerViewPort;
-    this.bottomViewPort.height = this.calculateViewPortHeight(this.bottomViewPort.numberOfItems);
+    this._bottomViewPort = new ViewPort();
 
-    this.renderViewPort(this.bottomViewPort);
+    this._bottomViewPort.scrollTop = topScrollTop + (2 * this._viewPortHeight);
+    this._bottomViewPort.itemsFromIndex = fromIndex + (2 * this._itemsPerViewPort);
+    this._bottomViewPort.items = viewPortItems.slice(2 * this._itemsPerViewPort, 3 * this._itemsPerViewPort);
+    this._bottomViewPort.isLastViewPort = this._bottomViewPort.numberOfItems < this._itemsPerViewPort;
+    this._bottomViewPort.height = this.calculateViewPortHeight(this._bottomViewPort.numberOfItems);
+
+    if (!this._middleViewPort.isLastViewPort) {
+      this.renderViewPort(this._bottomViewPort);
+    }
   }
 
   private calculateViewPortHeight(numberOfItems: number): number {
-    if (numberOfItems === this.itemsPerViewPort) {
-      return this.viewPortHeight;
+    if (numberOfItems === this._itemsPerViewPort) {
+      return this._viewPortHeight;
     }
 
-    let rowCount = Math.ceil(numberOfItems / this.itemsPerRow);
+    let rowCount = Math.ceil(numberOfItems / this._itemsPerRow) || 0;
 
     return rowCount * this.visibleItemHeight;
   }
