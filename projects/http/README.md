@@ -95,6 +95,7 @@ coolHttp.registerGlobalHeader(new HttpHeader('MyHttpHeader', 'MyHeadersValue'));
 ```
 
 - registerGlobalHeader(header: HttpHeader): void
+- getGlobalHeaders(): HttpHeader[]
 - deregisterGlobalHeader(headerKey: string): boolean
 - removeAllRegisteredGlobalHeaders(): void
 

@@ -53,6 +53,10 @@ export class CoolHttp {
     this._globalHeaders.push(header);
   }
 
+  public getGlobalHeaders(): HttpHeader[] {
+    return this._globalHeaders;
+  }
+
   public deregisterGlobalHeader(headerKey: string): boolean {
     const indexOfHeader = this._globalHeaders.findIndex(header => header.key === headerKey);
 
