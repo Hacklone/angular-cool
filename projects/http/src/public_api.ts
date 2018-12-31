@@ -8,5 +8,6 @@ export * from './lib/http-header.model';
 export * from './lib/http-error.model';
 export * from './lib/request-interceptor.interface';
 export * from './lib/response-interceptor.interface';
+export * from './lib/request-options.interface';
 
 export * from './lib/cool-http.module';

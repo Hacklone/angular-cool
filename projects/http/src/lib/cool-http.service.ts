@@ -7,7 +7,8 @@ import { IRequestInterceptor } from './request-interceptor.interface';
 import { IResponseInterceptor } from './response-interceptor.interface';
 import { HttpError } from './http-error.model';
 import { DEFAULT_REQUEST_OPTIONS, RequestOptions } from './request-options.interface';
-import { Observable ,  from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { AngularRequestOptions } from './angular-request-options.interface';
 
 export interface Func<T, T1, T2, TResult> {
   (item: T, item1: T1, item2: T2): TResult;
@@ -160,12 +161,12 @@ export class CoolHttp {
     });
   }
 
-  private async _requestCoreAsync<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, RequestOptions, Observable<HttpResponse<string>>>): Promise<T> {
+  private async _requestCoreAsync<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, AngularRequestOptions, Observable<HttpResponse<string>>>): Promise<T> {
     url = this._convertUrl(url);
 
-    options = this._modifyOptions(options);
+    const modifiedOptions = this._modifyOptions(options);
 
-    let clientHeaders = this._convertAngularHeadersToHttpClientHeaders(<HttpHeaders> options.headers);
+    let clientHeaders = this._convertAngularHeadersToHttpClientHeaders(<HttpHeaders>modifiedOptions.headers);
 
     let shouldIntercept = await this._invokeRequestInterceptorsAsync(url, method, data, clientHeaders);
 
@@ -173,14 +174,13 @@ export class CoolHttp {
       return;
     }
 
-    options.headers = this._updateAngularHeadersFromHttpClientHeaders(clientHeaders, <HttpHeaders> options.headers);
+    modifiedOptions.headers = this._updateAngularHeadersFromHttpClientHeaders(clientHeaders, <HttpHeaders>modifiedOptions.headers);
 
     let response: HttpResponse<string>;
 
     try {
-      response = await action(url, data, options).toPromise();
-    }
-    catch (errorResponse) {
+      response = await action(url, data, modifiedOptions).toPromise();
+    } catch (errorResponse) {
       response = errorResponse;
     }
 
@@ -198,12 +198,11 @@ export class CoolHttp {
 
     try {
       returnValue = JSON.parse(response.body);
-    }
-    catch (e) {
-      returnValue = { data: response.body };
+    } catch (e) {
+      returnValue = {data: response.body};
     }
 
-    return <T> returnValue;
+    return <T>returnValue;
   }
 
   public getObservable<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
@@ -254,7 +253,7 @@ export class CoolHttp {
     });
   }
 
-  private _requestCoreObservable<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, RequestOptions, Observable<HttpResponse<string>>>): Observable<T> {
+  private _requestCoreObservable<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, AngularRequestOptions, Observable<HttpResponse<string>>>): Observable<T> {
     return from(this._requestCoreAsync(url, method, data, options, action));
   }
 
@@ -268,20 +267,23 @@ export class CoolHttp {
     return returnUrl;
   }
 
-  private _modifyOptions(options: RequestOptions): RequestOptions {
+  private _modifyOptions(options: RequestOptions): AngularRequestOptions {
+    const resultOptions: AngularRequestOptions = {
+      headers: options.headers || new HttpHeaders(),
+      observe: 'response',
+      params: options.params,
+      reportProgress: options.reportProgress,
+      responseType: 'text',
+      withCredentials: options.withCredentials || this._withCredentials,
+    };
+
     options.headers = options.headers || new HttpHeaders();
-    options.observe = 'response';
-    options.responseType = 'text';
 
-    options.headers = this._appendGlobalHeaders(<HttpHeaders> options.headers);
+    resultOptions.headers = this._appendGlobalHeaders(<HttpHeaders>resultOptions.headers);
 
-    options.headers = this._tryAppendRegisteredCookiesToCustomHeaders(<HttpHeaders> options.headers);
+    resultOptions.headers = this._tryAppendRegisteredCookiesToCustomHeaders(<HttpHeaders>resultOptions.headers);
 
-    if (this._withCredentials) {
-      options.withCredentials = true;
-    }
-
-    return options;
+    return resultOptions;
   }
 
   private _appendGlobalHeaders(headers: HttpHeaders): HttpHeaders {
