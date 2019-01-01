@@ -91,7 +91,8 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
 
     await this.initialRenderAsync();
 
-    const scrollEventSource = this._scrollContainer.tagName === 'HTML' ? window : this._scrollContainer;
+    const isBodyScroll = this._scrollContainer.tagName === 'HTML';
+    const scrollEventSource = isBodyScroll ? window : this._scrollContainer;
 
     fromEvent(scrollEventSource, 'scroll')
       .pipe(
@@ -99,7 +100,7 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
         takeUntil(this._componentDestroyedSubject),
       )
       .subscribe(async () => {
-        await this.handleCurrentScroll(this._scrollContainer.scrollTop);
+        await this.handleCurrentScroll(isBodyScroll ? window.document.body.scrollTop : this._scrollContainer.scrollTop);
       });
 
     fromEvent(window, 'resize')
