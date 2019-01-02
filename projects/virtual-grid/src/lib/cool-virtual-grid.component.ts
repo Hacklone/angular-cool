@@ -74,6 +74,9 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
   @Input()
   public itemSpace: number;
 
+  @Input()
+  public bodyScroll: boolean;
+
   @ContentChild(TemplateRef)
   public template: TemplateRef<Object>;
 
@@ -131,6 +134,14 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
     }
 
     function getScrollContainer() {
+      if (self.bodyScroll) {
+        const htmlElement = window.document.getElementsByTagName('html')[0];
+
+        htmlElement.setAttribute(SCROLL_CONTAINER_ATTRIBUTE_NAME, 'true');
+
+        return htmlElement;
+      }
+
       let currentNode = self.element.nativeElement.parentNode;
 
       while (currentNode) {
@@ -161,6 +172,16 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
 
   public async reRenderAsync(): Promise<void> {
     await this.reRenderFromScrollAsync(this._scrollContainer.scrollTop);
+  }
+
+  public async resetAsync(): Promise<void> {
+    if (this.bodyScroll) {
+      window.document.body.scrollTo(0, 0);
+    } else {
+      this._scrollContainer.scrollTo(0, 0);
+    }
+
+    await this.reRenderAsync();
   }
 
   private get visibleItemHeight() {
@@ -242,6 +263,10 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
   }
 
   private async handleCurrentScroll(scrollTop: number): Promise<any> {
+    if (scrollTop < 0) {
+      scrollTop = 0;
+    }
+
     if (scrollTop > this._bottomViewPort.bottomScrollTop && this.isLastViewPortRendered) {
       return;
     }

@@ -74,8 +74,12 @@ Place the `cool-virtual-grid-container` attribute on any html element. This elem
 - `[itemSpace]: number`
   - required
   - space between the grid items in pixels
+- `[bodyScroll]: boolean`
+  - whether the scroll container is the body. When set the cool-virtual-grid-container attribute is not required
 - `reRenderAsync(): Promise<void>`
   - refreshes the grid. Useful when something changes in the background
+- `resetAsync(): Promise<void>`
+  - resets scroll position and calls `reRenderAsync()`
 
 ## License
 > The MIT License (MIT)

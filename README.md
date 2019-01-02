@@ -18,6 +18,11 @@
 [inline-edit-field-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/inline-edit-field.svg
 [inline-edit-field-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/inline-edit-field.svg
 
+[virtual-grid-npm-url]: https://npmjs.org/package/@angular-cool/virtual-grid
+[virtual-grid-npm-image]: https://img.shields.io/npm/v/@angular-cool/virtual-grid.svg
+[virtual-grid-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/virtual-grid.svg
+[virtual-grid-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/virtual-grid.svg
+
 # Angular Cool
 
 Cool libraries and components for angular.
