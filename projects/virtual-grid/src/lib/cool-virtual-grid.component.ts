@@ -206,15 +206,13 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
         fromIndex = 0;
       }
 
-      const result = this.itemIterator.next(fromIndex, numberOfItems);
+      const result = await this.itemIterator.next(fromIndex, numberOfItems);
 
       if (!result) {
         return [];
       }
 
-      if (typeof (result.value.then) === 'function') {
-        return await result.value;
-      } else if (result.value instanceof Array) {
+      if (result.value instanceof Array) {
         return result.value;
       }
 

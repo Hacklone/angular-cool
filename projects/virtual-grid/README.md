@@ -40,10 +40,12 @@ import { AsyncIterator } from '@angular-cool/virtual-grid';
 export class MyAppComponent {
     constructor(private _http: HttpClient) {
         this.myItemIterator = {
-            next: (fromIndex, length) => {
+            next: async (fromIndex, length) => {
+                const values = await this._http.get(`/api/items?from${fromIndex}&length=${length}`).toPromise();
+              
                 return {
                     done: false,
-                    value: this._http.get(`/api/items?from${fromIndex}&length=${length}`).toPromise(),
+                    value: values,
                 };
             }
         };
