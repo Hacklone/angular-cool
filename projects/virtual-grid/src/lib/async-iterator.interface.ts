@@ -1,4 +1,4 @@
-export interface AsyncIterator<T extends PromiseLike<any> | Array<any>> {
+export interface AsyncIterator<T> {
   next(fromIndex: number, numberOfItems: number): PromiseLike<IteratedValue<T>>
 }
 
