@@ -40,9 +40,9 @@ const MILLISECONDS_TO_WAIT_ON_WINDOW_RESIZE_BEFORE_RENDERING = 200;
   `]
 })
 export class CoolVirtualGridComponent implements OnInit, OnDestroy {
-  private _scrollContainer;
+  private _scrollContainer: HTMLElement;
 
-  private _currentElementHeight: number = 0;
+  private _currentElementHeight = 0;
 
   private _itemsPerRow: number;
   private _rowsPerViewPort: number;
@@ -57,6 +57,8 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
   private _moveBottomBoundary: number;
 
   private _componentDestroyedSubject: Subject<void> = new Subject<void>();
+
+  private plannedViewPortScrollTop: number;
 
   constructor(private element: ElementRef,
               private viewContainer: ViewContainerRef) {
@@ -78,7 +80,7 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
   public bodyScroll: boolean;
 
   @ContentChild(TemplateRef)
-  public template: TemplateRef<Object>;
+  public template: TemplateRef<object>;
 
   public async ngOnInit(): Promise<any> {
     const self = this;
@@ -300,8 +302,6 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
     return this._topViewPort.isLastViewPort || this._middleViewPort.isLastViewPort || this._bottomViewPort.isLastViewPort;
   }
 
-  private plannedViewPortScrollTop: number;
-
   private async moveUpAsync(): Promise<void> {
     const viewPortScrollTop = this._topViewPort.scrollTop - this._viewPortHeight;
     const fromIndex = this._topViewPort.itemsFromIndex - this._itemsPerViewPort;
@@ -389,8 +389,8 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
       this._setHeightForElement(minimumElementHeight);
     }
 
-    for (let item of viewPort.items) {
-      let embeddedView = this.template.createEmbeddedView({
+    for (const item of viewPort.items) {
+      const embeddedView = this.template.createEmbeddedView({
         $implicit: item
       });
 
@@ -398,7 +398,7 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
 
       this.viewContainer.insert(embeddedView);
 
-      let itemNode = document.createElement('div');
+      const itemNode = document.createElement('div');
       itemNode.classList.add('cool-virtual-grid-item');
       itemNode.style.display = 'inline-block';
       itemNode.style.verticalAlign = 'top';
@@ -406,7 +406,7 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
       itemNode.style.width = `${this.itemWidth}px`;
       itemNode.style.margin = `${this.itemSpace}px`;
 
-      for (let viewNode of embeddedView.rootNodes) {
+      for (const viewNode of embeddedView.rootNodes) {
         itemNode.appendChild(viewNode);
       }
 
@@ -416,14 +416,14 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
     this.element.nativeElement.appendChild(viewPort.nativeElement);
   }
 
-  private _setHeightForElement(minimumElementHeight) {
+  private _setHeightForElement(minimumElementHeight: number) {
     this._currentElementHeight = minimumElementHeight;
 
     this.element.nativeElement.style.height = `${this._currentElementHeight}px`;
   }
 
   private destroyViewPort(viewPort: ViewPort) {
-    for (let item of viewPort.renderedItems) {
+    for (const item of viewPort.renderedItems) {
       item.destroy();
     }
 
@@ -501,7 +501,7 @@ export class CoolVirtualGridComponent implements OnInit, OnDestroy {
       return this._viewPortHeight;
     }
 
-    let rowCount = Math.ceil(numberOfItems / this._itemsPerRow) || 0;
+    const rowCount = Math.ceil(numberOfItems / this._itemsPerRow) || 0;
 
     return rowCount * this.visibleItemHeight;
   }

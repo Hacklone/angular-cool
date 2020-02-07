@@ -29,8 +29,8 @@ import { CoolInlineEditFieldInputDirective } from './cool-inline-edit-field-inpu
   ]
 })
 export class CoolInlineEditFieldComponent implements AfterContentInit, ControlValueAccessor, OnDestroy {
-  private _onChangeDelegate: Function;
-  private _onTouchedDelegate: Function;
+  private _onChangeDelegate: (value: string) => void;
+  private _onTouchedDelegate: (value: string) => void;
   private _stopEditSubscription: Subscription;
   private _stopEditSubject: Subject<void> = new Subject<void>();
 
@@ -41,8 +41,8 @@ export class CoolInlineEditFieldComponent implements AfterContentInit, ControlVa
 
   public originalValue: string;
   public innerValue: string;
-  public isEditing: boolean = false;
-  public isDisabled: boolean = false;
+  public isEditing = false;
+  public isDisabled = false;
 
   @ContentChild(CoolInlineEditFieldInputDirective)
   public fieldInput: CoolInlineEditFieldInputDirective;
@@ -63,13 +63,13 @@ export class CoolInlineEditFieldComponent implements AfterContentInit, ControlVa
   public type: string;
 
   @Output()
-  public onSave: EventEmitter<string> = new EventEmitter<string>();
+  public saved: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  public onEdit: EventEmitter<string> = new EventEmitter<string>();
+  public editStarted: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  public onStopEdit: EventEmitter<string> = new EventEmitter<string>();
+  public editStopped: EventEmitter<string> = new EventEmitter<string>();
 
   public width: number;
   public height: number;
@@ -95,7 +95,7 @@ export class CoolInlineEditFieldComponent implements AfterContentInit, ControlVa
 
     this._updateSize();
 
-    this.onEdit.emit();
+    this.editStarted.emit();
 
     this.isEditing = true;
 
@@ -115,10 +115,10 @@ export class CoolInlineEditFieldComponent implements AfterContentInit, ControlVa
       this._onChangeDelegate(this.innerValue);
       this._onTouchedDelegate(this.innerValue);
 
-      this.onSave.emit(this.innerValue);
+      this.saved.emit(this.innerValue);
     }
 
-    this.onStopEdit.emit();
+    this.editStopped.emit();
   }
 
   public onFieldKeyUp(keyCode: number) {

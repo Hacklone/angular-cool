@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CoolDialogResult } from '../cool-dialog-result.interface';
 import { CoolDialogConfig } from '../cool-dialog-config.interface';
 
 @Component({
-  selector: 'app-cool-dialog',
+  selector: 'cool-dialog',
   templateUrl: './cool-dialog.component.html',
   styleUrls: ['./cool-dialog.component.scss']
 })
 export class CoolDialogComponent implements OnInit {
-  constructor(private _dialogRef: MatDialogRef<CoolDialogComponent>,
+  constructor(private _dialogRef: MatDialogRef<CoolDialogComponent, CoolDialogResult>,
               @Inject(MAT_DIALOG_DATA) private _dialogConfig: CoolDialogConfig) {
   }
 
@@ -25,7 +25,7 @@ export class CoolDialogComponent implements OnInit {
 
   public showCancelActionButton: boolean;
 
-  public textConfirmation: string;
+  public textConfirmation: string | undefined;
 
 
   public confirmInput: string;
@@ -41,13 +41,13 @@ export class CoolDialogComponent implements OnInit {
   }
 
   public onCancelClick() {
-    this._dialogRef.close(<CoolDialogResult> {
+    this._dialogRef.close({
       isConfirmed: false
     });
   }
 
   public onConfirmClick() {
-    this._dialogRef.close(<CoolDialogResult> {
+    this._dialogRef.close({
       isConfirmed: true
     });
   }

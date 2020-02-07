@@ -17,7 +17,7 @@ export class ViewPort {
     return this.items.length;
   }
 
-  renderedItems: EmbeddedViewRef<Object>[];
+  renderedItems: EmbeddedViewRef<object>[];
 
   get bottomScrollTop() {
     return this.scrollTop + this.height;

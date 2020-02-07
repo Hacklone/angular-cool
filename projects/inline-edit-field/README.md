@@ -12,6 +12,15 @@ Cool inline edit field for angular
 ## Install 
 > npm install --save @angular-cool/inline-edit-field
 
+## Install peer dependencies
+> npm install --save @fortawesome/angular-fontawesome
+>
+> npm install --save @fortawesome/fontawesome-svg-core
+>
+> npm install --save @fortawesome/free-regular-svg-icons
+>
+> npm install --save @fortawesome/free-solid-svg-icons
+
 ## Setup
 ```javascript
 import { NgModule } from '@angular/core';
@@ -27,7 +36,7 @@ export class MyAppModule {}
 ```html
 <cool-inline-edit-field name="name"
                         [ngModel]="user.name"
-                        (onSave)="saveUserNameAsync($event)">
+                        (saved)="saveUserNameAsync($event)">
 </cool-inline-edit-field>
 ```
 
@@ -54,15 +63,15 @@ export class MyAppModule {}
     - Type of input
 
 ### Outputs
-* \(onSave)
+* \(saved)
     - Type: string
     - Called when a new value is to be saved
     
-* \(onEdit)
+* \(editStarted)
     - Type: string
     - Called when inline edit field goes into edit mode
     
-* \(onStopEdit)
+* \(editStopped)
     - Type: string
     - Called when inline edit field goes out of edit mode 
 

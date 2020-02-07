@@ -10,9 +10,7 @@ import { DEFAULT_REQUEST_OPTIONS, RequestOptions } from './request-options.inter
 import { from, Observable } from 'rxjs';
 import { AngularRequestOptions } from './angular-request-options.interface';
 
-export interface Func<T, T1, T2, TResult> {
-  (item: T, item1: T1, item2: T2): TResult;
-}
+export type Func<T, T1, T2, TResult> = (item: T, item1: T1, item2: T2) => TResult;
 
 @Injectable()
 export class CoolHttp {
@@ -21,14 +19,17 @@ export class CoolHttp {
   private _globalHeaders: HttpHeader[] = [];
   private _requestInterceptors: IRequestInterceptor[] = [];
   private _responseInterceptors: IResponseInterceptor[] = [];
-  private _customCookieToHeaders = [];
-  private _baseUrl;
-  private _withCredentials;
+  private _customCookieToHeaders: {
+    cookieName: string;
+    customHeaderName: string;
+  }[] = [];
+  private _baseUrl: string | null;
+  private _withCredentials: boolean;
 
   constructor(private _http: HttpClient) {
   }
 
-  public get baseUrl(): string {
+  public get baseUrl(): string | null {
     return this._baseUrl;
   }
 
@@ -58,7 +59,7 @@ export class CoolHttp {
     return this._globalHeaders;
   }
 
-  public deregisterGlobalHeader(headerKey: string): boolean {
+  public deregisterGlobalHeader(headerKey: string | null | undefined): boolean {
     const indexOfHeader = this._globalHeaders.findIndex(header => header.key === headerKey);
 
     if (indexOfHeader === -1) {
@@ -79,7 +80,7 @@ export class CoolHttp {
   }
 
   public deregisterRequestInterceptor(requestInterceptor: IRequestInterceptor): boolean {
-    let indexOfItem = this._requestInterceptors.indexOf(requestInterceptor);
+    const indexOfItem = this._requestInterceptors.indexOf(requestInterceptor);
 
     if (indexOfItem === -1) {
       return false;
@@ -95,7 +96,7 @@ export class CoolHttp {
   }
 
   public deregisterResponseInterceptor(responseInterceptor: IResponseInterceptor): boolean {
-    let indexOfItem = this._responseInterceptors.indexOf(responseInterceptor);
+    const indexOfItem = this._responseInterceptors.indexOf(responseInterceptor);
 
     if (indexOfItem === -1) {
       return false;
@@ -108,65 +109,72 @@ export class CoolHttp {
 
   public sendCookieValueInCustomHeader(cookieName: string, customHeaderName: string): void {
     this._customCookieToHeaders.push({
-      cookieName: cookieName,
-      customHeaderName: customHeaderName
+      cookieName,
+      customHeaderName
     });
   }
 
-  public async getAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async getAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'GET', null, options, (url, data, modOptions) => {
-      return that._http.get(url, modOptions);
+    return await that._requestCoreAsync<T>(url, 'GET', null, options, (innerUrl, data, modOptions) => {
+      return that._http.get(innerUrl, modOptions);
     });
   }
 
-  public async postAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async postAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'POST', data, options, (url, data, modOptions) => {
-      return that._http.post(url, data, modOptions);
+    return await that._requestCoreAsync<T>(url, 'POST', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.post(innerUrl, innerData, modOptions);
     });
   }
 
-  public async putAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async putAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'PUT', data, options, (url, data, modOptions) => {
-      return that._http.put(url, data, modOptions);
+    return await that._requestCoreAsync<T>(url, 'PUT', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.put(innerUrl, innerData, modOptions);
     });
   }
 
-  public async deleteAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async deleteAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'DELETE', null, options, (url, data, modOptions) => {
-      return that._http['delete'](url, modOptions);
+    return await that._requestCoreAsync<T>(url, 'DELETE', null, options, (innerUrl, data, modOptions) => {
+      return that._http.delete(innerUrl, modOptions);
     });
   }
 
-  public async patchAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async patchAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'PATCH', data, options, (url, data, modOptions) => {
-      return that._http.patch(url, data, modOptions);
+    return await that._requestCoreAsync<T>(url, 'PATCH', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.patch(innerUrl, innerData, modOptions);
     });
   }
 
-  public async headAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
-    let that = this;
+  public async headAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+    const that = this;
 
-    return await that._requestCoreAsync<T>(url, 'HEAD', null, options, (url, data, modOptions) => {
-      return that._http.head(url, modOptions);
+    return await that._requestCoreAsync<T>(url, 'HEAD', null, options, (innerUrl, data, modOptions) => {
+      return that._http.head(innerUrl, modOptions);
     });
   }
 
-  private async _requestCoreAsync<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, AngularRequestOptions, Observable<HttpResponse<string>>>): Promise<T> {
+  private async _requestCoreAsync<T = any>(
+    url: string,
+    method: string,
+    data: any,
+    options: RequestOptions,
+    action: Func<string, any, AngularRequestOptions,
+      Observable<HttpResponse<string>>>
+  ): Promise<T | undefined> {
     url = this._convertUrl(url);
 
     const modifiedOptions = this._modifyOptions(options);
 
-    let clientHeaders = this._convertAngularHeadersToHttpClientHeaders(<HttpHeaders>modifiedOptions.headers);
+    const clientHeaders = this._convertAngularHeadersToHttpClientHeaders(<HttpHeaders> modifiedOptions.headers);
 
     let shouldIntercept = await this._invokeRequestInterceptorsAsync(url, method, data, clientHeaders);
 
@@ -174,7 +182,7 @@ export class CoolHttp {
       return;
     }
 
-    modifiedOptions.headers = this._updateAngularHeadersFromHttpClientHeaders(clientHeaders, <HttpHeaders>modifiedOptions.headers);
+    modifiedOptions.headers = this._updateAngularHeadersFromHttpClientHeaders(clientHeaders, <HttpHeaders> modifiedOptions.headers);
 
     let response: HttpResponse<string>;
 
@@ -197,63 +205,69 @@ export class CoolHttp {
     let returnValue;
 
     try {
-      returnValue = JSON.parse(response.body);
+      returnValue = response.body ? JSON.parse(response.body) : null;
     } catch (e) {
-      returnValue = {data: response.body};
+      returnValue = { data: response.body };
     }
 
-    return <T>returnValue;
+    return <T> returnValue;
   }
 
   public getObservable<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'GET', null, options, (url, data, modOptions) => {
-      return that._http.get(url, modOptions);
+    return that._requestCoreObservable<T>(url, 'GET', null, options, (innerUrl, data, modOptions) => {
+      return that._http.get(innerUrl, modOptions);
     });
   }
 
   public postObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'POST', data, options, (url, data, modOptions) => {
-      return that._http.post(url, data, modOptions);
+    return that._requestCoreObservable<T>(url, 'POST', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.post(innerUrl, innerData, modOptions);
     });
   }
 
   public putObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'PUT', data, options, (url, data, modOptions) => {
-      return that._http.put(url, data, modOptions);
+    return that._requestCoreObservable<T>(url, 'PUT', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.put(innerUrl, innerData, modOptions);
     });
   }
 
   public deleteObservable<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'DELETE', null, options, (url, data, modOptions) => {
-      return that._http['delete'](url, modOptions);
+    return that._requestCoreObservable<T>(url, 'DELETE', null, options, (innerUrl, data, modOptions) => {
+      return that._http.delete(innerUrl, modOptions);
     });
   }
 
   public patchObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'PATCH', data, options, (url, data, modOptions) => {
-      return that._http.patch(url, data, modOptions);
+    return that._requestCoreObservable<T>(url, 'PATCH', data, options, (innerUrl, innerData, modOptions) => {
+      return that._http.patch(innerUrl, innerData, modOptions);
     });
   }
 
   public headObservable<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
-    let that = this;
+    const that = this;
 
-    return that._requestCoreObservable<T>(url, 'HEAD', null, options, (url, data, modOptions) => {
-      return that._http.head(url, modOptions);
+    return that._requestCoreObservable<T>(url, 'HEAD', null, options, (innerUrl, data, modOptions) => {
+      return that._http.head(innerUrl, modOptions);
     });
   }
 
-  private _requestCoreObservable<T = any>(url: string, method: string, data: any, options: RequestOptions, action: Func<string, any, AngularRequestOptions, Observable<HttpResponse<string>>>): Observable<T> {
+  private _requestCoreObservable<T = any>(
+    url: string,
+    method: string,
+    data: any,
+    options: RequestOptions,
+    action: Func<string, any, AngularRequestOptions, Observable<HttpResponse<string>>>
+  ): Observable<T> {
     return from(this._requestCoreAsync(url, method, data, options, action));
   }
 
@@ -279,9 +293,9 @@ export class CoolHttp {
 
     options.headers = options.headers || new HttpHeaders();
 
-    resultOptions.headers = this._appendGlobalHeaders(<HttpHeaders>resultOptions.headers);
+    resultOptions.headers = this._appendGlobalHeaders(<HttpHeaders> resultOptions.headers);
 
-    resultOptions.headers = this._tryAppendRegisteredCookiesToCustomHeaders(<HttpHeaders>resultOptions.headers);
+    resultOptions.headers = this._tryAppendRegisteredCookiesToCustomHeaders(<HttpHeaders> resultOptions.headers);
 
     return resultOptions;
   }
@@ -290,7 +304,9 @@ export class CoolHttp {
     let newHeaders = headers;
 
     for (const registeredHeader of this._globalHeaders) {
-      newHeaders = headers.set(registeredHeader.key, registeredHeader.value);
+      if (registeredHeader.key && registeredHeader.value) {
+        newHeaders = headers.set(registeredHeader.key, registeredHeader.value);
+      }
     }
 
     return newHeaders;
@@ -322,7 +338,13 @@ export class CoolHttp {
     return false;
   }
 
-  private async _invokeResponseInterceptorsAsync(response: HttpResponse<Object>, url: string, method: string, data: any, headers: HttpHeader[]): Promise<boolean> {
+  private async _invokeResponseInterceptorsAsync(
+    response: HttpResponse<string>,
+    url: string,
+    method: string,
+    data: any,
+    headers: HttpHeader[]
+  ): Promise<boolean> {
     for (const responseInterceptor of this._responseInterceptors) {
       const shouldIntercept = await responseInterceptor.afterResponseAsync(response, url, method, data, headers);
 
@@ -336,12 +358,7 @@ export class CoolHttp {
 
   private _convertAngularHeadersToHttpClientHeaders(headers: HttpHeaders): HttpHeader[] {
     return headers.keys().map(headerKey => {
-      const httpClientHeader = new HttpHeader();
-
-      httpClientHeader.key = headerKey;
-      httpClientHeader.value = headers.get(headerKey);
-
-      return httpClientHeader;
+      return new HttpHeader(headerKey, headers.get(headerKey) || '');
     });
   }
 

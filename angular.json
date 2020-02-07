@@ -4,10 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "storage": {
+      "projectType": "library",
       "root": "projects/storage",
       "sourceRoot": "projects/storage/src",
-      "projectType": "library",
-      "prefix": "lib",
+      "prefix": "cool",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -17,7 +17,7 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/storage/ng-package.prod.json"
+              "tsConfig": "projects/storage/tsconfig.lib.prod.json"
             }
           }
         },
@@ -43,51 +43,11 @@
         }
       }
     },
-    "http": {
-      "root": "projects/http",
-      "sourceRoot": "projects/http/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/http/tsconfig.lib.json",
-            "project": "projects/http/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/http/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/http/src/test.ts",
-            "tsConfig": "projects/http/tsconfig.spec.json",
-            "karmaConfig": "projects/http/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/http/tsconfig.lib.json",
-              "projects/http/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "dialogs": {
+      "projectType": "library",
       "root": "projects/dialogs",
       "sourceRoot": "projects/dialogs/src",
-      "projectType": "library",
-      "prefix": "lib",
+      "prefix": "cool",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -97,7 +57,7 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/dialogs/ng-package.prod.json"
+              "tsConfig": "projects/dialogs/tsconfig.lib.prod.json"
             }
           }
         },
@@ -123,11 +83,51 @@
         }
       }
     },
+    "http": {
+      "projectType": "library",
+      "root": "projects/http",
+      "sourceRoot": "projects/http/src",
+      "prefix": "cool",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/http/tsconfig.lib.json",
+            "project": "projects/http/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/http/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/http/src/test.ts",
+            "tsConfig": "projects/http/tsconfig.spec.json",
+            "karmaConfig": "projects/http/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/http/tsconfig.lib.json",
+              "projects/http/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "inline-edit-field": {
+      "projectType": "library",
       "root": "projects/inline-edit-field",
       "sourceRoot": "projects/inline-edit-field/src",
-      "projectType": "library",
-      "prefix": "lib",
+      "prefix": "cool",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -137,7 +137,7 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/inline-edit-field/ng-package.prod.json"
+              "tsConfig": "projects/inline-edit-field/tsconfig.lib.prod.json"
             }
           }
         },
@@ -164,16 +164,21 @@
       }
     },
     "loading-indicator": {
+      "projectType": "library",
       "root": "projects/loading-indicator",
       "sourceRoot": "projects/loading-indicator/src",
-      "projectType": "library",
-      "prefix": "lib",
+      "prefix": "cool",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/loading-indicator/tsconfig.lib.json",
             "project": "projects/loading-indicator/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/loading-indicator/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -199,16 +204,21 @@
       }
     },
     "virtual-grid": {
+      "projectType": "library",
       "root": "projects/virtual-grid",
       "sourceRoot": "projects/virtual-grid/src",
-      "projectType": "library",
-      "prefix": "lib",
+      "prefix": "cool",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/virtual-grid/tsconfig.lib.json",
             "project": "projects/virtual-grid/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/virtual-grid/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -232,7 +242,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "angular-cool"
+    }},
+  "defaultProject": "storage"
 }

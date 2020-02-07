@@ -17,8 +17,8 @@ export class CoolLoadingIndicatorComponent implements OnInit, OnDestroy, IReques
 
   coolHttp: CoolHttp;
 
-  showIndicatorCounter: number = 0;
-  showIndicator: boolean = false;
+  showIndicatorCounter = 0;
+  showIndicator = false;
 
   @Input()
   indicatorDelay: number;
@@ -32,7 +32,7 @@ export class CoolLoadingIndicatorComponent implements OnInit, OnDestroy, IReques
   }
 
   beforeRequestAsync(url: string, method: string, data: any, headers: HttpHeader[]): Promise<boolean> {
-    let that = this;
+    const that = this;
 
     this.showIndicatorCounter++;
 
@@ -42,8 +42,7 @@ export class CoolLoadingIndicatorComponent implements OnInit, OnDestroy, IReques
           this.showIndicator = true;
         }
       }, this.indicatorDelay || DEFAULT_INDICATOR_DELAY);
-    }
-    else if (this.shouldShowIndicator) {
+    } else if (this.shouldShowIndicator) {
       this.showIndicator = true;
     }
 

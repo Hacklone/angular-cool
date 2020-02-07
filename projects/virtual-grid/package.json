@@ -1,10 +1,12 @@
 {
   "name": "@angular-cool/virtual-grid",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Cool virtual scroll grid for angular",
   "peerDependencies": {
-    "rxjs": "^6.3.3",
-    "@angular/core": "^7.0.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "tslib": "^1.10.0",
+    "rxjs": "^6.3.3"
   },
   "repository": {
     "type": "git",

@@ -6,12 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoolDialogComponent } from './cool-dialog/cool-dialog.component';
 import { CoolDialogService } from './cool-dialog.service';
 
-import {
-  MatButtonModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule
-} from '@angular/material';
+import { MatButtonModule, } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -37,4 +35,5 @@ import {
     CoolDialogComponent,
   ]
 })
-export class CoolDialogsModule { }
+export class CoolDialogsModule {
+}

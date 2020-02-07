@@ -1,11 +1,12 @@
 {
   "name": "@angular-cool/http",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Cool features over angular Http Client.",
   "peerDependencies": {
-    "rxjs": "^6.3.3",
-    "@angular/core": "^7.0.0",
-    "@angular/common": "^7.0.0"
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "tslib": "^1.10.0",
+    "rxjs": "^6.3.3"
   },
   "repository": {
     "type": "git",
