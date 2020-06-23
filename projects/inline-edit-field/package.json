@@ -1,13 +1,13 @@
 {
   "name": "@angular-cool/inline-edit-field",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Cool inline edit field for angular",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/core": "^9.0.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.10.0",
-    "@fortawesome/angular-fontawesome": "^0.6.0-alpha.0",
+    "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-regular-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.12.1"

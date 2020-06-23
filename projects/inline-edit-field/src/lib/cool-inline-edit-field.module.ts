@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CoolInlineEditFieldComponent } from './cool-inline-edit-field.component';
 import { CoolInlineEditFieldInputDirective } from './cool-inline-edit-field-input.directive';
 import { CommonModule } from '@angular/common';
-import './icon-library';
+import { faCheck, faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   imports: [
@@ -14,9 +14,7 @@ import './icon-library';
 
     FontAwesomeModule,
   ],
-  providers: [
-
-  ],
+  providers: [],
   declarations: [
     CoolInlineEditFieldComponent,
     CoolInlineEditFieldInputDirective,
@@ -26,4 +24,12 @@ import './icon-library';
     CoolInlineEditFieldInputDirective,
   ],
 })
-export class CoolInlineEditFieldModule { }
+export class CoolInlineEditFieldModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      faCheck,
+      faTimes,
+      faPencilAlt,
+    );
+  }
+}
