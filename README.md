@@ -59,6 +59,11 @@ Cool inline edit field for angular
 
 Cool button with loading indicator for angular
 
+## [@angular-cool/loading-button](/projects/social-login-buttons/README.md) 
+[![NPM version][social-login-buttons-npm-image]][social-login-buttons-npm-url] [![Downloads][social-login-buttons-downloads-image]][social-login-buttons-npm-url]  [![Total Downloads][social-login-buttons-total-downloads-image]][social-login-buttons-npm-url]
+
+Cool social login buttons for angular
+
 ## [@angular-cool/virtual-grid](/projects/virtual-grid/README.md) 
 [![NPM version][virtual-grid-npm-image]][virtual-grid-npm-url] [![Downloads][virtual-grid-downloads-image]][virtual-grid-npm-url]  [![Total Downloads][virtual-grid-total-downloads-image]][virtual-grid-npm-url]
 
