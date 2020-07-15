@@ -163,6 +163,46 @@
         }
       }
     },
+    "loading-button": {
+      "projectType": "library",
+      "root": "projects/loading-button",
+      "sourceRoot": "projects/loading-button/src",
+      "prefix": "cool",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/loading-button/tsconfig.lib.json",
+            "project": "projects/loading-button/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/loading-button/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/loading-button/src/test.ts",
+            "tsConfig": "projects/loading-button/tsconfig.spec.json",
+            "karmaConfig": "projects/loading-button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/loading-button/tsconfig.lib.json",
+              "projects/loading-button/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "loading-indicator": {
       "projectType": "library",
       "root": "projects/loading-indicator",

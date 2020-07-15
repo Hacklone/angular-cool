@@ -18,6 +18,11 @@
 [inline-edit-field-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/inline-edit-field.svg
 [inline-edit-field-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/inline-edit-field.svg
 
+[loading-button-npm-url]: https://npmjs.org/package/@angular-cool/loading-button
+[loading-button-npm-image]: https://img.shields.io/npm/v/@angular-cool/loading-button.svg
+[loading-button-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/loading-button.svg
+[loading-button-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/loading-button.svg
+
 [virtual-grid-npm-url]: https://npmjs.org/package/@angular-cool/virtual-grid
 [virtual-grid-npm-image]: https://img.shields.io/npm/v/@angular-cool/virtual-grid.svg
 [virtual-grid-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/virtual-grid.svg
@@ -48,6 +53,11 @@ Cool dialogs for angular
 [![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]
 
 Cool inline edit field for angular
+
+## [@angular-cool/loading-button](/projects/loading-button/README.md) 
+[![NPM version][loading-button-npm-image]][loading-button-npm-url] [![Downloads][loading-button-downloads-image]][loading-button-npm-url]  [![Total Downloads][loading-button-total-downloads-image]][loading-button-npm-url]
+
+Cool button with loading indicator for angular
 
 ## [@angular-cool/virtual-grid](/projects/virtual-grid/README.md) 
 [![NPM version][virtual-grid-npm-image]][virtual-grid-npm-url] [![Downloads][virtual-grid-downloads-image]][virtual-grid-npm-url]  [![Total Downloads][virtual-grid-total-downloads-image]][virtual-grid-npm-url]
