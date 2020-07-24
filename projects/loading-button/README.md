@@ -28,7 +28,7 @@ async myAsyncFunction(parameters: any): Promise<any> {
 ```
 
 ```html
-<cool-loading-button [clickHandler]="myAsyncFunction"
+<cool-loading-button [clickHandler]="myAsyncFunction.bind(this)"
                      [clickParameters]="{ parametersPassToTheFunction: 'test' }">
   Click me
 </cool-loading-button>
@@ -39,6 +39,7 @@ async myAsyncFunction(parameters: any): Promise<any> {
 * \[clickHandler]
     - Type: (parameters: any) => Promise<any> | any 
     - Async function to run when the button is clicked
+    - Note: Don't forget the ```.bind(this)``` part when binding this parameter
 
 * \[clickParameters]
     - Type: any 

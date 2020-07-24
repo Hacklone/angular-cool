@@ -23,6 +23,11 @@
 [loading-button-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/loading-button.svg
 [loading-button-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/loading-button.svg
 
+[social-login-buttons-npm-url]: https://npmjs.org/package/@angular-cool/social-login-buttons
+[social-login-buttons-npm-image]: https://img.shields.io/npm/v/@angular-cool/social-login-buttons.svg
+[social-login-buttons-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/social-login-buttons.svg
+[social-login-buttons-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/social-login-buttons.svg
+
 [virtual-grid-npm-url]: https://npmjs.org/package/@angular-cool/virtual-grid
 [virtual-grid-npm-image]: https://img.shields.io/npm/v/@angular-cool/virtual-grid.svg
 [virtual-grid-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/virtual-grid.svg
@@ -59,7 +64,7 @@ Cool inline edit field for angular
 
 Cool button with loading indicator for angular
 
-## [@angular-cool/loading-button](/projects/social-login-buttons/README.md) 
+## [@angular-cool/social-login-buttons](/projects/social-login-buttons/README.md) 
 [![NPM version][social-login-buttons-npm-image]][social-login-buttons-npm-url] [![Downloads][social-login-buttons-downloads-image]][social-login-buttons-npm-url]  [![Total Downloads][social-login-buttons-total-downloads-image]][social-login-buttons-npm-url]
 
 Cool social login buttons for angular
