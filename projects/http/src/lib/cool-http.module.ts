@@ -10,7 +10,7 @@ import { CoolHttp } from './cool-http.service';
 })
 export class CoolHttpModule {
   /** @deprecated */
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<CoolHttpModule> {
     return {
       ngModule: CoolHttpModule,
       providers: []

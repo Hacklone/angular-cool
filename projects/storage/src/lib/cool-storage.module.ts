@@ -10,7 +10,7 @@ import { CoolSessionStorage } from './cool-session-storage';
 })
 export class CoolStorageModule {
   /** @deprecated */
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<CoolStorageModule> {
     return {
       ngModule: CoolStorageModule,
       providers: []
