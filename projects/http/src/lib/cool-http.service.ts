@@ -114,7 +114,7 @@ export class CoolHttp {
     });
   }
 
-  public async getAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async getAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'GET', null, options, (innerUrl, data, modOptions) => {
@@ -122,7 +122,7 @@ export class CoolHttp {
     });
   }
 
-  public async postAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async postAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'POST', data, options, (innerUrl, innerData, modOptions) => {
@@ -130,7 +130,7 @@ export class CoolHttp {
     });
   }
 
-  public async putAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async putAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'PUT', data, options, (innerUrl, innerData, modOptions) => {
@@ -138,7 +138,7 @@ export class CoolHttp {
     });
   }
 
-  public async deleteAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async deleteAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'DELETE', null, options, (innerUrl, data, modOptions) => {
@@ -146,7 +146,7 @@ export class CoolHttp {
     });
   }
 
-  public async patchAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async patchAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'PATCH', data, options, (innerUrl, innerData, modOptions) => {
@@ -154,7 +154,7 @@ export class CoolHttp {
     });
   }
 
-  public async headAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T | undefined> {
+  public async headAsync<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'HEAD', null, options, (innerUrl, data, modOptions) => {
@@ -169,7 +169,7 @@ export class CoolHttp {
     options: RequestOptions,
     action: Func<string, any, AngularRequestOptions,
       Observable<HttpResponse<string>>>
-  ): Promise<T | undefined> {
+  ): Promise<T> {
     url = this._convertUrl(url);
 
     const modifiedOptions = this._modifyOptions(options);
@@ -179,7 +179,7 @@ export class CoolHttp {
     let shouldIntercept = await this._invokeRequestInterceptorsAsync(url, method, data, clientHeaders);
 
     if (shouldIntercept) {
-      return;
+      throw new Error('Request intercepted');
     }
 
     modifiedOptions.headers = this._updateAngularHeadersFromHttpClientHeaders(clientHeaders, <HttpHeaders> modifiedOptions.headers);
@@ -195,7 +195,7 @@ export class CoolHttp {
     shouldIntercept = await this._invokeResponseInterceptorsAsync(response, url, method, data, clientHeaders);
 
     if (shouldIntercept) {
-      return;
+      throw new Error('Response intercepted');
     }
 
     if (!response.ok) {
