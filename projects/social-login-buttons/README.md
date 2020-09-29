@@ -25,14 +25,14 @@ export class MyAppModule {}
 ### Usage
 
 ```html
-<cool-google-button style="dark" (click)="onGoogleLoginClicked()">
+<cool-google-button color="dark" (click)="onGoogleLoginClicked()">
   Login with Google
 </cool-google-button>
 ```
 
 ### API
 #### Inputs
-* \[style]
+* \[color]
     - Type: 'dark' | 'light' 
     - Style of the button
   

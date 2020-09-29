@@ -14,7 +14,7 @@ export class CoolGoogleButtonComponent implements OnInit {
   public disabled: boolean;
 
   @Input()
-  public style: 'dark' | 'light' = 'dark';
+  public color: 'dark' | 'light' = 'dark';
 
   @Output()
   public click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
