@@ -10,7 +10,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/storage/tsconfig.lib.json",
             "project": "projects/storage/ng-package.json"
@@ -50,7 +50,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/dialogs/tsconfig.lib.json",
             "project": "projects/dialogs/ng-package.json"
@@ -90,7 +90,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/http/tsconfig.lib.json",
             "project": "projects/http/ng-package.json"
@@ -130,7 +130,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/inline-edit-field/tsconfig.lib.json",
             "project": "projects/inline-edit-field/ng-package.json"
@@ -170,7 +170,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/loading-button/tsconfig.lib.json",
             "project": "projects/loading-button/ng-package.json"
@@ -210,7 +210,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/social-login-buttons/tsconfig.lib.json",
             "project": "projects/social-login-buttons/ng-package.json"
@@ -250,7 +250,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/loading-indicator/tsconfig.lib.json",
             "project": "projects/loading-indicator/ng-package.json"
@@ -290,7 +290,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/virtual-grid/tsconfig.lib.json",
             "project": "projects/virtual-grid/ng-package.json"

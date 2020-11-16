@@ -1,12 +1,12 @@
 {
   "name": "@angular-cool/loading-button",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "Cool button with loading indicator for angular",
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/material": "^9.0.0",
-    "@angular/cdk": "^9.0.0"
+    "@angular/common": ">=10.0.0",
+    "@angular/core": ">=10.0.0",
+    "@angular/material": ">=10.0.0",
+    "@angular/cdk": ">=10.0.0"
 },
   "repository": {
     "type": "git",
