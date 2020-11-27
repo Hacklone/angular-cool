@@ -15,7 +15,9 @@ import { NgModule } from '@angular/core';
 import { CoolStorageModule } from '@angular-cool/storage';
 
 @NgModule({
-    imports: [CoolStorageModule]
+    imports: [
+        CoolStorageModule.forRoot(),
+    ]
 })
 export class MyAppModule {}
 ```

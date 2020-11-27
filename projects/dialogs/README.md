@@ -15,7 +15,9 @@ import { NgModule } from '@angular/core';
 import { CoolDialogsModule } from '@angular-cool/dialogs';
 
 @NgModule({
-    imports: [CoolDialogsModule]
+    imports: [
+        CoolDialogsModule.forRoot(),
+    ]
 })
 export class MyAppModule {}
 ```

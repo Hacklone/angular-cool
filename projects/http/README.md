@@ -15,7 +15,9 @@ import { NgModule } from '@angular/core';
 import { CoolHttpModule } from '@angular-cool/http';
 
 @NgModule({
-    imports: [CoolHttpModule]
+    imports: [
+        CoolHttpModule.forRoot(),
+    ]
 })
 export class MyAppModule {}
 ```
