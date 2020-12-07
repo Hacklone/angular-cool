@@ -5,7 +5,7 @@
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
     "@angular/core": ">=10.0.0"
-},
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hacklone/angular-cool.git"
@@ -17,7 +17,8 @@
     "login",
     "sign-in",
     "google",
-    "button"
+    "button",
+    "facebook"
   ],
   "author": "Hacklone <toakak@gmail.com>",
   "license": "MIT",
@@ -30,8 +31,7 @@
   "bugs": {
     "url": "https://github.com/Hacklone/angular-cool/issues"
   },
-  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/social-login-buttons/README.md"
-,
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/social-login-buttons/README.md",
   "dependencies": {
     "tslib": "^2.0.0"
   }
