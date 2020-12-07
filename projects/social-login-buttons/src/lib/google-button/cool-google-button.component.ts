@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 })
 export class CoolGoogleButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   @Input()
   public disabled: boolean;

@@ -15,7 +15,7 @@ import { CoolFacebookButtonComponent } from './facebook-button/cool-facebook-but
   ],
   exports: [
     CoolGoogleButtonComponent,
-    CoolFacebookButtonComponent
+    CoolFacebookButtonComponent,
   ],
 })
 export class CoolSocialLoginButtonsModule {

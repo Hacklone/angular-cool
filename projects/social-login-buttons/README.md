@@ -6,6 +6,10 @@
 # @angular-cool/social-login-buttons [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
 Cool social login buttons for angular
 
+Featured buttons:
+- Google 
+- Facebook
+
 ## Install 
 > npm install --save @angular-cool/social-login-buttons
 
@@ -44,6 +48,31 @@ export class MyAppModule {}
 * \(click)
     - Type: MouseEvent
     - Called when the button has been clicked
+
+## Facebook button
+
+### Usage
+
+```html
+<cool-facebook-button color="dark" (click)="onFacebookLoginClicked()">
+  Login with Facebook
+</cool-facebook-button>
+```
+
+### API
+#### Inputs
+* \[color]
+  - Type: 'dark' | 'light'
+  - Style of the button
+
+* \[disabled]
+  - Type: boolean
+  - Whether the button is disabled
+
+#### Outputs
+* \(click)
+  - Type: MouseEvent
+  - Called when the button has been clicked
 
 ## License
 > The MIT License (MIT)

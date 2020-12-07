@@ -3,11 +3,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 @Component({
   selector: 'cool-cool-facebook-button',
   templateUrl: './cool-facebook-button.component.html',
-  styleUrls: ['./cool-facebook-button.component.css']
+  styleUrls: ['./cool-facebook-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoolFacebookButtonComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   @Input()
   public disabled: boolean;
