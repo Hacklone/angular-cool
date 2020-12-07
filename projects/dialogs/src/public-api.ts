@@ -3,6 +3,7 @@
  */
 
 export * from './lib/cool-dialog.service';
+export * from './lib/cool-dialog/cool-dialog.component';
 export * from './lib/cool-dialog-config.interface';
 export * from './lib/cool-dialog-result.interface';
 export * from './lib/cool-dialogs.module';

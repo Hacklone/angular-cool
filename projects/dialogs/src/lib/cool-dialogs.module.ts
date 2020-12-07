@@ -35,7 +35,7 @@ export class CoolDialogsModule {
     return {
       ngModule: CoolDialogsModule,
       providers: [
-        CoolDialogService
+        CoolDialogService,
       ],
     };
   }
