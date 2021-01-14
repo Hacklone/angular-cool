@@ -16,7 +16,7 @@ Featured buttons:
 ## Setup
 ```javascript
 import { NgModule } from '@angular/core';
-import { CoolLoadingButtonModule } from '@angular-cool/social-login-buttons';
+import { CoolSocialLoginButtonsModule } from '@angular-cool/social-login-buttons';
 
 @NgModule({
     imports: [CoolSocialLoginButtonsModule]
