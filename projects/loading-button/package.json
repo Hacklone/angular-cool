@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/loading-button",
-  "version": "11.0.0",
+  "version": "11.1.0",
   "description": "Cool button with loading indicator for angular",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",

@@ -1,6 +1,7 @@
 <button mat-raised-button
         [color]="color"
         [disabled]="disabled || isLoading"
+        class="{{ innerClass }}"
         (click)="onClick()">
   <mat-spinner *ngIf="isLoading" [color]="spinnerColor" [diameter]="20" class="spinner"></mat-spinner>
 

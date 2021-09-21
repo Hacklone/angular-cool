@@ -34,6 +34,9 @@ export class CoolLoadingButtonComponent<T> {
   @Output()
   public loadingFinished = new EventEmitter<void>();
 
+  @Input('class')
+  public innerClass: string = '';
+
   public async onClick() {
     if (this.disabled || this.isLoading || !this.clickHandler) {
       return;
