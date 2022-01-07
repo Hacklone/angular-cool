@@ -8,7 +8,7 @@ export abstract class CoolStorageBase {
 
   protected constructor(storageObject: any, storageObjectName: string) {
     if (!storageObject) {
-      throw new Error(`Current browser does not support ${ storageObjectName }`);
+      throw new Error(`Current browser does not support ${storageObjectName}`);
     }
 
     this._storageObject = storageObject;
@@ -25,14 +25,14 @@ export abstract class CoolStorageBase {
     return this._itemRemovedSubject.asObservable();
   }
 
-  public getItem(key: string): string {
+  public getItem(key: string): string | null {
     return this._storageObject.getItem(key) || null;
   }
 
   public setItem(key: string, value: string): void {
     this._itemSetSubject.next({
       key,
-      value
+      value,
     });
 
     this._setItemInStorage(key, value);
@@ -47,14 +47,14 @@ export abstract class CoolStorageBase {
 
     this._itemRemovedSubject.next({
       key,
-      value: currentValue
+      value: currentValue,
     });
 
     this._storageObject.removeItem(key);
   }
 
-  public key(index: number): string {
-    return this._storageObject.key(index);
+  public key(index: number): string | null {
+    return this._storageObject.key(index) || null;
   }
 
   public clear(): void {
@@ -86,7 +86,7 @@ export abstract class CoolStorageBase {
   public setObject(key: string, value: any): void {
     this._itemSetSubject.next({
       key,
-      value
+      value,
     });
 
     this._setItemInStorage(key, JSON.stringify(value));

@@ -5,7 +5,7 @@ export class CoolServerStorage {
     this._storageObject = {};
   }
 
-  public getItem(key: string): string {
+  public getItem(key: string): string | null {
     return this._storageObject[key] || null;
   }
 
@@ -17,8 +17,8 @@ export class CoolServerStorage {
     this._storageObject[key] = undefined;
   }
 
-  public key(index: number): string {
-    return this._storageObject.key(index);
+  public key(index: number): string | null {
+    return this._storageObject.key(index) || null;
   }
 
   public clear(): void {
