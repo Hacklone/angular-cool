@@ -11,24 +11,20 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
-  declarations: [
-    CoolDialogComponent,
-  ],
-  exports: [
-    CoolDialogComponent,
-  ],
-  entryComponents: [
-    CoolDialogComponent,
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+    declarations: [
+        CoolDialogComponent,
+    ],
+    exports: [
+        CoolDialogComponent,
+    ]
 })
 export class CoolDialogsModule {
   public static forRoot(): ModuleWithProviders<CoolDialogsModule> {
