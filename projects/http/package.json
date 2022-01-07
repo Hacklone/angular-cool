@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/http",
-  "version": "12.0.0",
+  "version": "13.0.0",
   "description": "Cool features over angular Http Client.",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
@@ -37,8 +37,7 @@
   "bugs": {
     "url": "https://github.com/Hacklone/angular-cool/issues"
   },
-  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/http/README.md"
-,
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/http/README.md",
   "dependencies": {
     "tslib": "^2.0.0"
   }
