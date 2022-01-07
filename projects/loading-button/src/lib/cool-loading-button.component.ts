@@ -1,14 +1,17 @@
-import { Component, EventEmitter, Input, Output, } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output, } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'cool-loading-button',
   templateUrl: './cool-loading-button.component.html',
   styleUrls: ['./cool-loading-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoolLoadingButtonComponent<T> {
 
-  constructor() {
+  constructor(
+    private _changeDetector: ChangeDetectorRef,
+  ) {
   }
 
   public isLoading: boolean;
@@ -57,5 +60,7 @@ export class CoolLoadingButtonComponent<T> {
     this.isLoading = loadingValue;
 
     this.loadingChanged.next(this.isLoading);
+
+    this._changeDetector.markForCheck();
   }
 }
