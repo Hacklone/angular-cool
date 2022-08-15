@@ -226,6 +226,6 @@
           }
         }
       }
-    }},
-  "defaultProject": "storage"
+    }
+  }
 }
