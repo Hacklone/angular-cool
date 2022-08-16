@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/social-login-buttons",
-  "version": "13.0.0",
+  "version": "13.1.0",
   "description": "Cool social login buttons for angular",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
