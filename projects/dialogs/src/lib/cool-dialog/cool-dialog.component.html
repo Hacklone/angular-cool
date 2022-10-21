@@ -1,8 +1,6 @@
 <h1 mat-dialog-title>{{ titleText }}</h1>
 
-<div mat-dialog-content>
-  {{ questionText }}
-</div>
+<div mat-dialog-content>{{ questionText }}</div>
 
 <div *ngIf="textConfirmation" class="mt-3">
   <div>To confirm please type <span class="bg-secondary text-warning px-2">{{ textConfirmation }}</span> into the input
