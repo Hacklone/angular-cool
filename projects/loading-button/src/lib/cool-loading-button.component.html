@@ -3,7 +3,9 @@
         [disabled]="disabled || isLoading"
         class="{{ innerClass }}"
         (click)="onClick()">
-  <mat-spinner *ngIf="isLoading" [color]="spinnerColor" [diameter]="20" class="spinner"></mat-spinner>
+  <div class="button-content-container">
+    <mat-spinner *ngIf="isLoading" [color]="spinnerColor" [diameter]="20" class="spinner"></mat-spinner>
 
-  <ng-content></ng-content>
+    <ng-content></ng-content>
+  </div>
 </button>
