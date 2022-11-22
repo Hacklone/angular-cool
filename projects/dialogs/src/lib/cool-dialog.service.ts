@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { CoolDialogComponent } from './cool-dialog/cool-dialog.component';
 import { CoolDialogConfig } from './cool-dialog-config.interface';
 import { CoolDialogResult } from './cool-dialog-result.interface';
