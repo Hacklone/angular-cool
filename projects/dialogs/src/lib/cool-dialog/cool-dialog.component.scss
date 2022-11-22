@@ -1,4 +1,10 @@
-mat-dialog-actions {
+.cool-dialog {
+  padding: 1rem;
+
+  white-space: pre-wrap;
+}
+
+[mat-dialog-actions] {
   button {
     margin-right: 10px;
 

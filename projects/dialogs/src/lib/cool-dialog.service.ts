@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CoolDialogComponent } from './cool-dialog/cool-dialog.component';
 import { CoolDialogConfig } from './cool-dialog-config.interface';
 import { CoolDialogResult } from './cool-dialog-result.interface';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class CoolDialogService {
@@ -16,7 +17,7 @@ export class CoolDialogService {
       data: config,
     });
 
-    const result = await dialogRef.afterClosed().toPromise();
+    const result = await firstValueFrom(dialogRef.afterClosed());
 
     return result || {
       isConfirmed: false,

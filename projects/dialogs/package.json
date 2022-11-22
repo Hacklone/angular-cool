@@ -1,12 +1,12 @@
 {
   "name": "@angular-cool/dialogs",
-  "version": "13.0.1",
+  "version": "15.0.0",
   "description": "Cool dialogs for angular.",
   "peerDependencies": {
-    "@angular/common": ">=10.0.0",
-    "@angular/core": ">=10.0.0",
-    "@angular/material": ">=10.0.0",
-    "@angular/cdk": ">=10.0.0",
+    "@angular/common": ">=15.0.0",
+    "@angular/core": ">=15.0.0",
+    "@angular/material": ">=15.0.0",
+    "@angular/cdk": ">=15.0.0",
     "rxjs": ">=6.0.0"
 },
   "repository": {
@@ -16,6 +16,7 @@
   "keywords": [
     "angular2",
     "angular",
+    "ngx",
     "dialog",
     "confirmation",
     "alert"

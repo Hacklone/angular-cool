@@ -7,7 +7,7 @@ export interface CoolDialogConfig {
 
   cancelActionButtonText?: string;
 
-  confirmActionButtonColor?: string;
+  confirmActionButtonColor?: 'primary' | 'accent' | 'warn';
 
   showCancelActionButton?: boolean;
 
