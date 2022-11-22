@@ -5,6 +5,8 @@
 }
 
 [mat-dialog-actions] {
+  padding: 0;
+
   button {
     margin-right: 10px;
 
@@ -14,12 +16,24 @@
   }
 }
 
+[mat-dialog-title] {
+  padding: 0.25rem 0 0.5rem 0;
+
+  &:before {
+    display: none;
+  }
+}
+
+[mat-dialog-content] {
+  padding: 0;
+}
+
 * {
   box-sizing: border-box;
 }
 
 .mt-3 {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .mt-2 {
