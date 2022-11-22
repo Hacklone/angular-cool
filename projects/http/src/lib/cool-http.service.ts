@@ -7,7 +7,7 @@ import { IRequestInterceptor } from './request-interceptor.interface';
 import { IResponseInterceptor } from './response-interceptor.interface';
 import { HttpError } from './http-error.model';
 import { DEFAULT_REQUEST_OPTIONS, RequestOptions } from './request-options.interface';
-import { from, Observable } from 'rxjs';
+import { firstValueFrom, from, Observable } from 'rxjs';
 import { AngularRequestOptions } from './angular-request-options.interface';
 
 export type Func<T, T1, T2, TResult> = (item: T, item1: T1, item2: T2) => TResult;
@@ -187,7 +187,13 @@ export class CoolHttp {
     let response: HttpResponse<string>;
 
     try {
-      response = await action(url, data, modifiedOptions).toPromise();
+      const actionResponse = await firstValueFrom(action(url, data, modifiedOptions));
+
+      if (!actionResponse) {
+        throw new Error('No response');
+      }
+
+      response = actionResponse;
     } catch (errorResponse) {
       response = errorResponse;
     }

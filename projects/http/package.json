@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/http",
-  "version": "13.0.0",
+  "version": "15.0.0",
   "description": "Cool features over angular Http Client.",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
@@ -14,6 +14,7 @@
   "keywords": [
     "angular2",
     "angular",
+    "ngx",
     "http",
     "httpclient",
     "interceptor",
