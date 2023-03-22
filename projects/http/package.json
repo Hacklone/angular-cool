@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/http",
-  "version": "15.0.0",
+  "version": "15.0.1",
   "description": "Cool features over angular Http Client.",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",

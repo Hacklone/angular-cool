@@ -122,7 +122,7 @@ export class CoolHttp {
     });
   }
 
-  public async postAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
+  public async postAsync<T = any, D = any>(url: string, data?: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'POST', data, options, (innerUrl, innerData, modOptions) => {
@@ -130,7 +130,7 @@ export class CoolHttp {
     });
   }
 
-  public async putAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
+  public async putAsync<T = any, D = any>(url: string, data?: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'PUT', data, options, (innerUrl, innerData, modOptions) => {
@@ -146,7 +146,7 @@ export class CoolHttp {
     });
   }
 
-  public async patchAsync<T = any>(url: string, data?: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
+  public async patchAsync<T = any, D = any>(url: string, data?: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Promise<T> {
     const that = this;
 
     return await that._requestCoreAsync<T>(url, 'PATCH', data, options, (innerUrl, innerData, modOptions) => {
@@ -227,7 +227,7 @@ export class CoolHttp {
     });
   }
 
-  public postObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
+  public postObservable<T = any, D = any>(url: string, data: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
     const that = this;
 
     return that._requestCoreObservable<T>(url, 'POST', data, options, (innerUrl, innerData, modOptions) => {
@@ -235,7 +235,7 @@ export class CoolHttp {
     });
   }
 
-  public putObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
+  public putObservable<T = any, D = any>(url: string, data: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
     const that = this;
 
     return that._requestCoreObservable<T>(url, 'PUT', data, options, (innerUrl, innerData, modOptions) => {
@@ -251,7 +251,7 @@ export class CoolHttp {
     });
   }
 
-  public patchObservable<T = any>(url: string, data: any, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
+  public patchObservable<T = any, D = any>(url: string, data?: D, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {
     const that = this;
 
     return that._requestCoreObservable<T>(url, 'PATCH', data, options, (innerUrl, innerData, modOptions) => {
