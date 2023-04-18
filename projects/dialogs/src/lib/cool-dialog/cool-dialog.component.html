@@ -18,6 +18,12 @@
     </div>
   </div>
 
+  <div *ngIf="checkBoxConfirmation">
+    <mat-checkbox [(ngModel)]="checkboxChecked">
+      <div style="white-space: normal" [innerHTML]="checkBoxConfirmation"></div>
+    </mat-checkbox>
+  </div>
+
   <div mat-dialog-actions>
     <div class="cool-w-100 cool-text-right cool-mt-3">
       <button *ngIf="showCancelActionButton"
@@ -28,7 +34,7 @@
       </button>
 
       <button (click)="onConfirmClick()"
-              [disabled]="textConfirmation && confirmInput !== textConfirmation"
+              [disabled]="(textConfirmation && confirmInput !== textConfirmation) || (checkBoxConfirmation && !checkboxChecked)"
               [color]="confirmActionButtonColor"
               mat-raised-button>
         {{ confirmActionButtonText }}

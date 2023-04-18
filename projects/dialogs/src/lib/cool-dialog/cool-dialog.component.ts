@@ -26,9 +26,10 @@ export class CoolDialogComponent implements OnInit {
   public showCancelActionButton: boolean;
 
   public textConfirmation: string | undefined;
-
-
   public confirmInput: string;
+
+  public checkBoxConfirmation: string | undefined;
+  public checkboxChecked = false;
 
   ngOnInit() {
     this.titleText = this._dialogConfig.titleText;
@@ -38,6 +39,7 @@ export class CoolDialogComponent implements OnInit {
     this.confirmActionButtonColor = this._dialogConfig.confirmActionButtonColor || 'primary';
     this.showCancelActionButton = this._dialogConfig.showCancelActionButton || true;
     this.textConfirmation = this._dialogConfig.textConfirmation;
+    this.checkBoxConfirmation = this._dialogConfig.checkBoxConfirmation;
   }
 
   public onCancelClick() {

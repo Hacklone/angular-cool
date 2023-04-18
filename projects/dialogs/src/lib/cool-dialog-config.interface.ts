@@ -12,4 +12,6 @@ export interface CoolDialogConfig {
   showCancelActionButton?: boolean;
 
   textConfirmation?: string;
+
+  checkBoxConfirmation?: string;
 }

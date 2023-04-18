@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
   ],
   declarations: [
     CoolDialogComponent,
