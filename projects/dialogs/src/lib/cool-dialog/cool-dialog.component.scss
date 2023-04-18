@@ -1,6 +1,8 @@
 .cool-dialog {
   padding: 1rem;
 
+  max-width: 500px;
+
   white-space: pre-wrap;
 
   [mat-dialog-actions] {
