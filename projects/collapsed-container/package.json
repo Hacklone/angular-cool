@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/collapsed-container",
-  "version": "15.0.0",
+  "version": "15.0.4",
   "description": "Cool collapsed-container for angular.",
   "peerDependencies": {
     "@angular/common": ">=15.0.0",

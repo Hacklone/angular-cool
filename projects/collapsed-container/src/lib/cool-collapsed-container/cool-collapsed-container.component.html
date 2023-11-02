@@ -1,7 +1,7 @@
 <div class="cool-collapsed-container"
      [class.expanded]="collapsingEnabled && isExpanded"
      [class.collapsed]="collapsingEnabled && isCollapsed"
-     [@isExpanded]="{ value: (!collapsingEnabled ? 'initial' : (isExpanded ? 'expanded' : 'collapsed')), params: { maxHeight: collapsedMaxHeight, expandedMaxHeight: expandedMaxHeightPixelValue }}"
+     [@isExpanded]="{ value: (!collapsingEnabled ? 'initial' : (isExpanded ? 'expanded' : 'collapsed')), params: { collapsedMaxHeight: collapsedMaxHeight, expandedMaxHeight: expandedMaxHeightPixelValue }}"
 >
   <div #contentContainer class="cool-collapsed-container-content">
     <div>

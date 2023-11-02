@@ -6,6 +6,8 @@
 # @angular-cool/collapsed-container [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
 Cool collapsed container in angular
 
+<img src="https://i.ibb.co/4WksJnG/collapsed-container.gif" alt="collapsed-container">
+
 ## Install 
 > npm install --save @angular-cool/collapsed-container
 

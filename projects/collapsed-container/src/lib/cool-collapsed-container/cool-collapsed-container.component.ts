@@ -57,7 +57,7 @@ import { CommonModule } from '@angular/common';
         },
       ),
       transition('collapsed <=> expanded', [
-        animate('1s'),
+        animate('0.25s ease-in-out'),
       ]),
       transition('initial <=> *', [
         animate('0s'),
@@ -76,7 +76,8 @@ export class CoolCollapsedContainer implements AfterViewInit, OnDestroy {
 
   constructor(
     private _changeDetector: ChangeDetectorRef,
-  ) {}
+  ) {
+  }
 
   protected expandedMaxHeightPixelValue = 3000;
 
@@ -171,7 +172,7 @@ export class CoolCollapsedContainer implements AfterViewInit, OnDestroy {
   }
 
   private _isContentHeightLargerThanMaxHeight(): boolean {
-    const containerChild = <HTMLElement | undefined>this.contentContainerElement?.nativeElement.children.item(0);
+    const containerChild = <HTMLElement | undefined> this.contentContainerElement?.nativeElement.children.item(0);
 
     if (!containerChild) {
       return false;
@@ -183,6 +184,12 @@ export class CoolCollapsedContainer implements AfterViewInit, OnDestroy {
       return false;
     }
 
-    return containerChild.offsetHeight > maxHeightNumber;
+    const result = containerChild.offsetHeight > maxHeightNumber;
+
+    if (result) {
+      this.expandedMaxHeightPixelValue = containerChild.offsetHeight * 1.2;
+    }
+
+    return result;
   }
 }
