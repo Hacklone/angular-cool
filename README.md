@@ -13,6 +13,11 @@
 [dialogs-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/dialogs.svg
 [dialogs-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/dialogs.svg
 
+[collapsed-container-npm-url]: https://npmjs.org/package/@angular-cool/collapsed-container
+[collapsed-container-npm-image]: https://img.shields.io/npm/v/@angular-cool/collapsed-container.svg
+[collapsed-container-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/collapsed-container.svg
+[collapsed-container-total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/collapsed-container.svg
+
 [inline-edit-field-npm-url]: https://npmjs.org/package/@angular-cool/inline-edit-field
 [inline-edit-field-npm-image]: https://img.shields.io/npm/v/@angular-cool/inline-edit-field.svg
 [inline-edit-field-downloads-image]: https://img.shields.io/npm/dm/@angular-cool/inline-edit-field.svg
@@ -53,6 +58,11 @@ Cool features over angular HttpClient
 [![NPM version][dialogs-npm-image]][dialogs-npm-url] [![Downloads][dialogs-downloads-image]][dialogs-npm-url]  [![Total Downloads][dialogs-total-downloads-image]][dialogs-npm-url]
 
 Cool dialogs for angular
+
+## [@angular-cool/collapsed-container](/projects/collapsed-container/README.md) 
+[![NPM version][collapsed-container-npm-image]][collapsed-container-npm-url] [![Downloads][collapsed-container-downloads-image]][collapsed-container-npm-url]  [![Total Downloads][collapsed-container-total-downloads-image]][collapsed-container-npm-url]
+
+Cool collapsed container for angular
 
 ## [@angular-cool/inline-edit-field](/projects/inline-edit-field/README.md) 
 [![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]

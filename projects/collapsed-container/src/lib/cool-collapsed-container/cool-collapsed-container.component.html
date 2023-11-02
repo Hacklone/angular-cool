@@ -1,0 +1,26 @@
+<div class="cool-collapsed-container"
+     [class.expanded]="collapsingEnabled && isExpanded"
+     [class.collapsed]="collapsingEnabled && isCollapsed"
+     [@isExpanded]="{ value: (!collapsingEnabled ? 'initial' : (isExpanded ? 'expanded' : 'collapsed')), params: { maxHeight: collapsedMaxHeight, expandedMaxHeight: expandedMaxHeightPixelValue }}"
+>
+  <div #contentContainer class="cool-collapsed-container-content">
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <div *ngIf="collapsingEnabled" class="cool-collapsed-container-button-container" (click)="toggleExpanded()">
+    <button (click)="toggleExpanded(); $event.stopPropagation()">
+      <ng-container *ngIf="isExpanded">
+        {{ collapseButtonText || 'Show less' }}
+
+        <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" class="svg-inline--fa fa-chevron-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path></svg>
+      </ng-container>
+      <ng-container *ngIf="isCollapsed">
+        {{ expandButtonText || 'Show more' }}
+
+        <svg role="img" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" class="svg-inline--fa fa-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg>
+      </ng-container>
+    </button>
+  </div>
+</div>

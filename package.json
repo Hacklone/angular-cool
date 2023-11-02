@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run build:dialogs && npm run build:http && npm run build:inline-edit-field && npm run build:loading-button && npm run build:loading-indicator && npm run build:social-login-buttons && npm run build:storage && npm run build:virtual-grid",
+    "build": "npm run build:dialogs && npm run build:collapsed-container && npm run build:http && npm run build:inline-edit-field && npm run build:loading-button && npm run build:loading-indicator && npm run build:social-login-buttons && npm run build:storage && npm run build:virtual-grid",
     "build:storage": "ng build --configuration=production storage",
     "build:dialogs": "ng build --configuration=production dialogs",
+    "build:collapsed-container": "ng build --configuration=production collapsed-container",
     "build:http": "ng build --configuration=production http",
     "build:inline-edit-field": "ng build --configuration=production inline-edit-field",
     "build:loading-button": "ng build --configuration=production loading-button",

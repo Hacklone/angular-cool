@@ -1,0 +1,37 @@
+{
+  "name": "@angular-cool/collapsed-container",
+  "version": "15.0.0",
+  "description": "Cool collapsed-container for angular.",
+  "peerDependencies": {
+    "@angular/common": ">=15.0.0",
+    "@angular/core": ">=15.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hacklone/angular-cool.git"
+  },
+  "keywords": [
+    "angular2",
+    "angular",
+    "ngx",
+    "collapsed",
+    "container",
+    "show more",
+    "show less"
+  ],
+  "author": "Hacklone <toakak@gmail.com>",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Hacklone/angular-cool/raw/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Hacklone/angular-cool/issues"
+  },
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/collapsed-container/README.md",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
