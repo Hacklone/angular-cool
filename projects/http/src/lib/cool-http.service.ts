@@ -284,7 +284,7 @@ export class CoolHttp {
       returnUrl = this._baseUrl + returnUrl;
     }
 
-    return returnUrl.replace(/\/\//g, '/');
+    return returnUrl.replace(/[^:]\/\//g, '/');
   }
 
   private _modifyOptions(options: RequestOptions): AngularRequestOptions {
