@@ -9,21 +9,19 @@ Cool button with loading indicator for angular
 ## Install 
 > npm install --save @angular-cool/loading-button
 
-## Setup
-```javascript
-import { NgModule } from '@angular/core';
-import { CoolLoadingButtonModule } from '@angular-cool/loading-button';
-
-@NgModule({
-    imports: [CoolLoadingButtonModule]
-})
-export class MyAppModule {}
-```
-
 ## Usage
+
 ```typescript
-async myAsyncFunction(parameters: any): Promise<any> {
-  // Do something async
+import { CoolLoadingButton } from '@angular-cool/loading-button';
+
+@Component({
+  imports: [CoolLoadingButton],
+  standalone: true,
+})
+export class MyComponent {
+  public async myAsyncFunction(parameters: any): Promise<any> {
+    // Do something async
+  }
 }
 ```
 

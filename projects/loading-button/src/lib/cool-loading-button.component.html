@@ -1,11 +1,47 @@
-<button mat-raised-button
-        [color]="color"
-        [disabled]="disabled || isLoading"
-        class="{{ innerClass }}"
-        (click)="onClick()">
+<ng-template #buttonContentTemplate>
   <div class="button-content-container">
-    <mat-spinner *ngIf="isLoading" [color]="spinnerColor" [diameter]="20" class="spinner"></mat-spinner>
-
-    <ng-content></ng-content>
+    @if (isLoading()) {
+      <mat-spinner [color]="spinnerColor" [diameter]="20" class="spinner"/>
+    }
+    <ng-content/>
   </div>
-</button>
+</ng-template>
+
+@switch (display) {
+  @case ('basic') {
+    <button mat-button
+            [color]="color"
+            [disabled]="disabled || isLoading()"
+            class="{{ innerClass }}"
+            (click)="onClick()">
+      <ng-container *ngTemplateOutlet="buttonContentTemplate"/>
+    </button>
+  }
+  @case ('flat') {
+    <button mat-flat-button
+            [color]="color"
+            [disabled]="disabled || isLoading()"
+            class="{{ innerClass }}"
+            (click)="onClick()">
+      <ng-container *ngTemplateOutlet="buttonContentTemplate"/>
+    </button>
+  }
+  @case ('stroked') {
+    <button mat-stroked-button
+            [color]="color"
+            [disabled]="disabled || isLoading()"
+            class="{{ innerClass }}"
+            (click)="onClick()">
+      <ng-container *ngTemplateOutlet="buttonContentTemplate"/>
+    </button>
+  }
+  @default {
+    <button mat-raised-button
+            [color]="color"
+            [disabled]="disabled || isLoading()"
+            class="{{ innerClass }}"
+            (click)="onClick()">
+      <ng-container *ngTemplateOutlet="buttonContentTemplate"/>
+    </button>
+  }
+}
