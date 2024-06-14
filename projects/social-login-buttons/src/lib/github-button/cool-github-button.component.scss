@@ -1,0 +1,61 @@
+.github-button {
+  height: 36px;
+  background-color: #444444;
+  border: 1px solid #444444;
+  color: #fff;
+  border-radius: 5px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0 1px rgba(0, 0, 0, 0.05);
+  transition-property: background-color, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  padding: 0;
+  line-height: 1;
+
+  cursor: pointer;
+
+  &.light {
+    background-color: #fff;
+    border: 1px solid #444;
+
+    color: #444;
+
+    .icon {
+      #logo {
+        fill: #444;
+      }
+    }
+  }
+
+  &:focus,
+  &:active,
+  &:hover {
+    outline: 0;
+  }
+
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40px;
+    height: 100%;
+    box-sizing: border-box;
+
+    position: relative;
+    top: -5px;
+
+    #logo {
+      fill: #fff;
+    }
+  }
+
+  .text {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px 0 10px;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-align: left;
+    user-select: none;
+  }
+}

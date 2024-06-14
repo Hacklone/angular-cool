@@ -1,10 +1,10 @@
 {
   "name": "@angular-cool/social-login-buttons",
-  "version": "13.1.0",
+  "version": "18.0.0",
   "description": "Cool social login buttons for angular",
   "peerDependencies": {
-    "@angular/common": ">=10.0.0",
-    "@angular/core": ">=10.0.0"
+    "@angular/common": ">=15.0.0",
+    "@angular/core": ">=15.0.0"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
     "sign-in",
     "google",
     "button",
-    "facebook"
+    "facebook",
+    "apple",
+    "github"
   ],
   "author": "Hacklone <toakak@gmail.com>",
   "license": "MIT",

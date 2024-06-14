@@ -6,12 +6,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
   styleUrls: ['./cool-facebook-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
+  standalone: true,
 })
-export class CoolFacebookButtonComponent implements OnInit {
-
-  constructor() {
-  }
-
+export class CoolFacebookButtonComponent {
   @Input()
   public disabled: boolean;
 
@@ -20,9 +17,6 @@ export class CoolFacebookButtonComponent implements OnInit {
 
   @Output()
   public click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-
-  ngOnInit() {
-  }
 
   public onClick(event: MouseEvent) {
     if (this.disabled) {

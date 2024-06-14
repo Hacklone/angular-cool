@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'cool-apple-button',
@@ -6,12 +6,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
   styleUrls: ['./cool-apple-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
+  standalone: true,
 })
-export class CoolAppleButtonComponent implements OnInit {
-
-  constructor() {
-  }
-
+export class CoolAppleButtonComponent {
   @Input()
   public disabled: boolean;
 
@@ -20,9 +17,6 @@ export class CoolAppleButtonComponent implements OnInit {
 
   @Output()
   public click: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-
-  ngOnInit() {
-  }
 
   public onClick(event: MouseEvent) {
     if (this.disabled) {

@@ -9,20 +9,11 @@ Cool social login buttons for angular
 Featured buttons:
 - Google 
 - Facebook
+- Apple
+- GitHub
 
 ## Install 
 > npm install --save @angular-cool/social-login-buttons
-
-## Setup
-```javascript
-import { NgModule } from '@angular/core';
-import { CoolSocialLoginButtonsModule } from '@angular-cool/social-login-buttons';
-
-@NgModule({
-    imports: [CoolSocialLoginButtonsModule]
-})
-export class MyAppModule {}
-```
 
 ## Google button
 
@@ -57,6 +48,56 @@ export class MyAppModule {}
 <cool-facebook-button color="dark" (click)="onFacebookLoginClicked()">
   Login with Facebook
 </cool-facebook-button>
+```
+
+### API
+#### Inputs
+* \[color]
+  - Type: 'dark' | 'light'
+  - Style of the button
+
+* \[disabled]
+  - Type: boolean
+  - Whether the button is disabled
+
+#### Outputs
+* \(click)
+  - Type: MouseEvent
+  - Called when the button has been clicked## Facebook button
+
+## Apple button
+
+### Usage
+
+```html
+<cool-apple-button color="dark" (click)="onAppleLoginClicked()">
+  Sign in with Apple
+</cool-apple-button>
+```
+
+### API
+#### Inputs
+* \[color]
+  - Type: 'dark' | 'light'
+  - Style of the button
+
+* \[disabled]
+  - Type: boolean
+  - Whether the button is disabled
+
+#### Outputs
+* \(click)
+  - Type: MouseEvent
+  - Called when the button has been clicked
+
+## GitHub button
+
+### Usage
+
+```html
+<cool-github-button color="dark" (click)="onGitHubLoginClicked()">
+  Sign in with GitHub
+</cool-github-button>
 ```
 
 ### API

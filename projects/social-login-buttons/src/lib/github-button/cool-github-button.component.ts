@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'cool-google-button',
-  templateUrl: './cool-google-button.component.html',
-  styleUrls: ['./cool-google-button.component.scss'],
+  selector: 'cool-github-button',
+  templateUrl: './cool-github-button.component.html',
+  styleUrls: ['./cool-github-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.ShadowDom,
   standalone: true,
 })
-export class CoolGoogleButtonComponent {
+export class CoolGithubButtonComponent {
   @Input()
   public disabled: boolean;
 
