@@ -14,6 +14,11 @@
 
   cursor: pointer;
 
+  display: inline-flex;
+  flex-direction: row;
+
+  align-items: center;
+
   &.light {
     background-color: #fff;
     border: 1px solid #444;
@@ -21,7 +26,7 @@
     color: #444;
 
     .icon {
-      #logo {
+      svg path {
         fill: #444;
       }
     }
@@ -36,14 +41,16 @@
   .icon {
     display: inline-block;
     vertical-align: middle;
-    width: 40px;
-    height: 100%;
     box-sizing: border-box;
 
+    padding: 0 10px;
     position: relative;
-    top: -5px;
+    top: 1px;
 
-    #logo {
+    svg path {
+      height: auto;
+      width: 28px;
+
       fill: #fff;
     }
   }
@@ -51,7 +58,7 @@
   .text {
     display: inline-block;
     vertical-align: middle;
-    padding: 0 10px 0 10px;
+    padding: 0 10px 0 0;
     font-size: 14px;
     font-weight: 500;
 
