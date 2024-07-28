@@ -49,6 +49,11 @@ Cool libraries and components for angular.
 
 Cool angular wrapper for LocalStorage and SessionStorage with Universal support
 
+## [@angular-cool/social-login-buttons](/projects/social-login-buttons/README.md)
+[![NPM version][social-login-buttons-npm-image]][social-login-buttons-npm-url] [![Downloads][social-login-buttons-downloads-image]][social-login-buttons-npm-url]  [![Total Downloads][social-login-buttons-total-downloads-image]][social-login-buttons-npm-url]
+
+Cool social login buttons for angular
+
 ## [@angular-cool/http](/projects/http/README.md) 
 [![NPM version][http-npm-image]][http-npm-url] [![Downloads][http-downloads-image]][http-npm-url]  [![Total Downloads][http-total-downloads-image]][http-npm-url]
 
@@ -59,25 +64,20 @@ Cool features over angular HttpClient
 
 Cool dialogs for angular
 
+## [@angular-cool/inline-edit-field](/projects/inline-edit-field/README.md)
+[![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]
+
+Cool inline edit field for angular
+
 ## [@angular-cool/collapsed-container](/projects/collapsed-container/README.md) 
 [![NPM version][collapsed-container-npm-image]][collapsed-container-npm-url] [![Downloads][collapsed-container-downloads-image]][collapsed-container-npm-url]  [![Total Downloads][collapsed-container-total-downloads-image]][collapsed-container-npm-url]
 
 Cool collapsed container for angular
 
-## [@angular-cool/inline-edit-field](/projects/inline-edit-field/README.md) 
-[![NPM version][inline-edit-field-npm-image]][inline-edit-field-npm-url] [![Downloads][inline-edit-field-downloads-image]][inline-edit-field-npm-url]  [![Total Downloads][inline-edit-field-total-downloads-image]][inline-edit-field-npm-url]
-
-Cool inline edit field for angular
-
 ## [@angular-cool/loading-button](/projects/loading-button/README.md) 
 [![NPM version][loading-button-npm-image]][loading-button-npm-url] [![Downloads][loading-button-downloads-image]][loading-button-npm-url]  [![Total Downloads][loading-button-total-downloads-image]][loading-button-npm-url]
 
 Cool button with loading indicator for angular
-
-## [@angular-cool/social-login-buttons](/projects/social-login-buttons/README.md) 
-[![NPM version][social-login-buttons-npm-image]][social-login-buttons-npm-url] [![Downloads][social-login-buttons-downloads-image]][social-login-buttons-npm-url]  [![Total Downloads][social-login-buttons-total-downloads-image]][social-login-buttons-npm-url]
-
-Cool social login buttons for angular
 
 ## [@angular-cool/virtual-grid](/projects/virtual-grid/README.md) 
 [![NPM version][virtual-grid-npm-image]][virtual-grid-npm-url] [![Downloads][virtual-grid-downloads-image]][virtual-grid-npm-url]  [![Total Downloads][virtual-grid-total-downloads-image]][virtual-grid-npm-url]
