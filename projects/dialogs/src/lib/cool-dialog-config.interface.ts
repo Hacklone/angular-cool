@@ -7,7 +7,7 @@ export interface CoolDialogConfig {
 
   cancelActionButtonText?: string;
 
-  confirmActionButtonColor?: 'primary' | 'accent' | 'warn';
+  confirmActionButtonColor?: CoolDialogButtonColors;
 
   showCancelActionButton?: boolean;
 
@@ -15,3 +15,5 @@ export interface CoolDialogConfig {
 
   checkBoxConfirmation?: string;
 }
+
+export type CoolDialogButtonColors = 'primary' | 'accent' | 'tertiary' | 'warn';

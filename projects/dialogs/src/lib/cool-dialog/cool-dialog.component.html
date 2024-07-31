@@ -3,40 +3,46 @@
 
   <div mat-dialog-content>{{ questionText }}</div>
 
-  <div *ngIf="textConfirmation" class="cool-mt-3">
-    <div>To confirm please type <span class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</span> into the
-      input
-      below to enable confirm button.
+  @if (textConfirmation) {
+    <div class="cool-mt-3">
+      <div>To confirm please type <span
+        class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</span> into the
+        input
+        below to enable confirm button.
+      </div>
+      <div class="cool-mt-2">
+        <mat-form-field class="cool-w-100">
+          <input name="confirm-input"
+                 [(ngModel)]="confirmInput"
+                 matInput
+                 placeholder="Write '{{ textConfirmation }}' to enable confirm button">
+        </mat-form-field>
+      </div>
     </div>
-    <div class="cool-mt-2">
-      <mat-form-field class="cool-w-100">
-        <input name="confirm-input"
-               [(ngModel)]="confirmInput"
-               matInput
-               placeholder="Write '{{ textConfirmation }}' to enable confirm button">
-      </mat-form-field>
-    </div>
-  </div>
+  }
 
-  <div *ngIf="checkBoxConfirmation" class="cool-mt-3">
-    <mat-checkbox [(ngModel)]="checkboxChecked">
-      <div style="white-space: normal" [innerHTML]="checkBoxConfirmation"></div>
-    </mat-checkbox>
-  </div>
+  @if (checkBoxConfirmation) {
+    <div class="cool-mt-3">
+      <mat-checkbox [(ngModel)]="checkboxChecked">
+        <div style="white-space: normal" [innerHTML]="checkBoxConfirmation"></div>
+      </mat-checkbox>
+    </div>
+  }
 
   <div mat-dialog-actions>
     <div class="cool-w-100 cool-text-right cool-mt-3">
-      <button *ngIf="showCancelActionButton"
-              (click)="onCancelClick()"
-              mat-raised-button
-              cdkFocusInitial>
-        {{ cancelActionButtonText }}
-      </button>
+      @if (showCancelActionButton) {
+        <button (click)="onCancelClick()"
+                mat-button
+                cdkTrapFocus>
+          {{ cancelActionButtonText }}
+        </button>
+      }
 
       <button (click)="onConfirmClick()"
               [disabled]="(textConfirmation && confirmInput !== textConfirmation) || (checkBoxConfirmation && !checkboxChecked)"
               [color]="confirmActionButtonColor"
-              mat-raised-button>
+              mat-flat-button>
         {{ confirmActionButtonText }}
       </button>
     </div>

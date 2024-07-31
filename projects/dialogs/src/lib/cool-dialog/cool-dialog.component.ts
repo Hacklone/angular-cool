@@ -1,16 +1,32 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoolDialogResult } from '../cool-dialog-result.interface';
-import { CoolDialogConfig } from '../cool-dialog-config.interface';
+import { CoolDialogButtonColors, CoolDialogConfig } from '../cool-dialog-config.interface';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'cool-dialog',
   templateUrl: './cool-dialog.component.html',
-  styleUrls: ['./cool-dialog.component.scss']
+  styleUrls: ['./cool-dialog.component.scss'],
+  standalone: true,
+  imports: [
+    MatCheckboxModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    CdkTrapFocus,
+  ],
 })
 export class CoolDialogComponent implements OnInit {
-  constructor(private _dialogRef: MatDialogRef<CoolDialogComponent, CoolDialogResult>,
-              @Inject(MAT_DIALOG_DATA) private _dialogConfig: CoolDialogConfig) {
+  constructor(
+    private _dialogRef: MatDialogRef<CoolDialogComponent, CoolDialogResult>,
+    @Inject(MAT_DIALOG_DATA) private _dialogConfig: CoolDialogConfig,
+  ) {
   }
 
   public titleText: string;
@@ -21,7 +37,7 @@ export class CoolDialogComponent implements OnInit {
 
   public cancelActionButtonText: string;
 
-  public confirmActionButtonColor: 'primary' | 'accent' | 'warn';
+  public confirmActionButtonColor: CoolDialogButtonColors;
 
   public showCancelActionButton: boolean;
 
