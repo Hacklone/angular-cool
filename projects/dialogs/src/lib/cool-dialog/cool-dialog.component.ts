@@ -53,7 +53,7 @@ export class CoolDialogComponent implements OnInit {
     this.confirmActionButtonText = this._dialogConfig.confirmActionButtonText || 'Ok';
     this.cancelActionButtonText = this._dialogConfig.cancelActionButtonText || 'Cancel';
     this.confirmActionButtonColor = this._dialogConfig.confirmActionButtonColor || 'primary';
-    this.showCancelActionButton = this._dialogConfig.showCancelActionButton || true;
+    this.showCancelActionButton = this._dialogConfig.showCancelActionButton ?? true;
     this.textConfirmation = this._dialogConfig.textConfirmation;
     this.checkBoxConfirmation = this._dialogConfig.checkBoxConfirmation;
   }
