@@ -5,6 +5,10 @@
 
   white-space: pre-wrap;
 
+  .inline-block {
+    display: inline-block;
+  }
+
   [mat-dialog-actions] {
     padding: 0;
 

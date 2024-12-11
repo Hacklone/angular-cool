@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/dialogs",
-  "version": "19.0.3",
+  "version": "19.0.4",
   "description": "Cool dialogs for angular.",
   "peerDependencies": {
     "@angular/common": ">=19.0.0",
