@@ -15,6 +15,8 @@ export interface CoolDialogConfig {
 
   textConfirmation?: string;
 
+  textConfirmationPlaceholder?: string;
+
   textConfirmationPrefixText?: string;
 
   textConfirmationPostfixText?: string;

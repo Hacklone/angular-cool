@@ -45,6 +45,7 @@ export class CoolDialogComponent implements OnInit {
 
   public textConfirmation: string | undefined;
 
+  public textConfirmationPlaceholder: string;
   public textConfirmationPrefixText: string;
   public textConfirmationPostfixText: string;
 
@@ -65,6 +66,7 @@ export class CoolDialogComponent implements OnInit {
     this.checkBoxConfirmation = this._dialogConfig.checkBoxConfirmation;
     this.textConfirmationPrefixText = this._dialogConfig.textConfirmationPrefixText || 'To confirm please type ';
     this.textConfirmationPostfixText = this._dialogConfig.textConfirmationPostfixText || ' into the input below to enable confirm button.';
+    this.textConfirmationPlaceholder = (this._dialogConfig.textConfirmationPlaceholder || `Write '$1' to enable confirm button`).replace('$1', this.textConfirmation || '');
   }
 
   public onCancelClick() {

@@ -5,17 +5,17 @@
 
   @if (textConfirmation) {
     <div class="cool-mt-3">
-      <div>To confirm please type <span
-        class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</span> into the
-        input
-        below to enable confirm button.
+      <div class="cool-flex-row-center">
+        <div>{{ textConfirmationPrefixText }}</div>
+        <div class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</div>
+        <div>{{ textConfirmationPostfixText }}</div>
       </div>
       <div class="cool-mt-2">
         <mat-form-field class="cool-w-100">
           <input name="confirm-input"
                  [(ngModel)]="confirmInput"
                  matInput
-                 placeholder="Write '{{ textConfirmation }}' to enable confirm button">
+                 [placeholder]="textConfirmationPlaceholder">
         </mat-form-field>
       </div>
     </div>
