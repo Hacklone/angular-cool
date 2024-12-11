@@ -9,6 +9,7 @@
     "build:dialogs": "ng build --configuration=production dialogs",
     "build:collapsed-container": "ng build --configuration=production collapsed-container",
     "build:http": "ng build --configuration=production http",
+    "build:repository": "ng build --configuration=production repository",
     "build:inline-edit-field": "ng build --configuration=production inline-edit-field",
     "build:loading-button": "ng build --configuration=production loading-button",
     "build:loading-indicator": "ng build --configuration=production loading-indicator",

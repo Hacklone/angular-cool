@@ -40,6 +40,9 @@
         "dist/inline-edit-field/inline-edit-field",
         "dist/inline-edit-field"
       ],
+      "repository": [
+        "./dist/repository"
+      ],
       "loading-indicator": [
         "dist/loading-indicator/loading-indicator",
         "dist/loading-indicator"

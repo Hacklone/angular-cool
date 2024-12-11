@@ -35,6 +35,8 @@ export class CoolDialogComponent implements OnInit {
 
   public confirmActionButtonText: string;
 
+  public confirmActionButtonClassNames: string[];
+
   public cancelActionButtonText: string;
 
   public confirmActionButtonColor: CoolDialogButtonColors;
@@ -42,6 +44,10 @@ export class CoolDialogComponent implements OnInit {
   public showCancelActionButton: boolean;
 
   public textConfirmation: string | undefined;
+
+  public textConfirmationPrefixText: string;
+  public textConfirmationPostfixText: string;
+
   public confirmInput: string;
 
   public checkBoxConfirmation: string | undefined;
@@ -51,11 +57,14 @@ export class CoolDialogComponent implements OnInit {
     this.titleText = this._dialogConfig.titleText;
     this.questionText = this._dialogConfig.questionText;
     this.confirmActionButtonText = this._dialogConfig.confirmActionButtonText || 'Ok';
+    this.confirmActionButtonClassNames = this._dialogConfig.confirmActionButtonClassNames ?? [];
     this.cancelActionButtonText = this._dialogConfig.cancelActionButtonText || 'Cancel';
     this.confirmActionButtonColor = this._dialogConfig.confirmActionButtonColor || 'primary';
     this.showCancelActionButton = this._dialogConfig.showCancelActionButton ?? true;
     this.textConfirmation = this._dialogConfig.textConfirmation;
     this.checkBoxConfirmation = this._dialogConfig.checkBoxConfirmation;
+    this.textConfirmationPrefixText = this._dialogConfig.textConfirmationPrefixText || 'To confirm please type ';
+    this.textConfirmationPostfixText = this._dialogConfig.textConfirmationPostfixText || ' into the input below to enable confirm button.';
   }
 
   public onCancelClick() {

@@ -5,6 +5,8 @@ export interface CoolDialogConfig {
 
   confirmActionButtonText?: string;
 
+  confirmActionButtonClassNames?: string[];
+
   cancelActionButtonText?: string;
 
   confirmActionButtonColor?: CoolDialogButtonColors;
@@ -12,6 +14,10 @@ export interface CoolDialogConfig {
   showCancelActionButton?: boolean;
 
   textConfirmation?: string;
+
+  textConfirmationPrefixText?: string;
+
+  textConfirmationPostfixText?: string;
 
   checkBoxConfirmation?: string;
 }

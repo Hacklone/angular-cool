@@ -42,6 +42,7 @@
       <button (click)="onConfirmClick()"
               [disabled]="(textConfirmation && confirmInput !== textConfirmation) || (checkBoxConfirmation && !checkboxChecked)"
               [color]="confirmActionButtonColor"
+              class="{{ confirmActionButtonClassNames.join(' ') }}"
               mat-flat-button>
         {{ confirmActionButtonText }}
       </button>

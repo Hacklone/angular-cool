@@ -1,25 +1,24 @@
 {
-  "name": "@angular-cool/dialogs",
+  "name": "@angular-cool/repository",
+  "description": "Cool stateful repository for angular",
   "version": "19.0.0",
-  "description": "Cool dialogs for angular.",
   "peerDependencies": {
-    "@angular/common": ">=19.0.0",
-    "@angular/core": ">=19.0.0",
-    "@angular/material": ">=19.0.0",
-    "@angular/cdk": ">=19.0.0",
-    "rxjs": ">=6.0.0"
-},
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hacklone/angular-cool.git"
   },
   "keywords": [
-    "angular2",
     "angular",
-    "ngx",
-    "dialog",
-    "confirmation",
-    "alert"
+    "repository",
+    "cache",
+    "pattern",
+    "cool"
   ],
   "author": "Hacklone <toakak@gmail.com>",
   "license": "MIT",
@@ -32,8 +31,6 @@
   "bugs": {
     "url": "https://github.com/Hacklone/angular-cool/issues"
   },
-  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/dialogs/README.md",
-  "dependencies": {
-    "tslib": "^2.0.0"
-  }
+  "homepage": "https://github.com/Hacklone/angular-cool/blob/master/projects/repository/README.md",
+  "sideEffects": false
 }
