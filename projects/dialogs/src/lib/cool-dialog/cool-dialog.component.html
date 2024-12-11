@@ -5,10 +5,8 @@
 
   @if (textConfirmation) {
     <div class="cool-mt-3">
-      <div class="cool-flex-row-center">
-        <div>{{ textConfirmationPrefixText }}</div>
-        <div class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</div>
-        <div>{{ textConfirmationPostfixText }}</div>
+      <div>
+        {{ textConfirmationPrefixText }}<div class="cool-bg-secondary cool-text-warning cool-px-2">{{ textConfirmation }}</div>{{ textConfirmationPostfixText }}
       </div>
       <div class="cool-mt-2">
         <mat-form-field class="cool-w-100">
