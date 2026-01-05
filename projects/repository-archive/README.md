@@ -4,58 +4,63 @@
 [total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/repository.svg
 
 # @angular-cool/repository [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
-Cool stateful signal repository for angular
-
-An easy-to-use signal repository that helps you manage your data loading and caching in your angular applications.
+Cool stateful repository for angular
 
 ## Install
 > npm install --save @angular-cool/repository
 
-## Usage
-
-### Create a Repository in your service layer
-
+## Setup
 ```typescript
-import { resourceRepository } from '@angular-cool/repository';
-import { inject, Injectable } from '@angular/core';
-import { ItemId } from './my-item.model';
+import { provideRepository } from '@angular-cool/repository';
 
-@Injectable()
-export class MyService {
-  private _http = inject(HttpClient);
-
-  private items = resourceRepository<ItemId>({
-    loader: ({ params }) => this._http.get(`https://myapi.com/items/${params}`).toPromise(),
-  });
-}
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRepository([
+      MyRepository1,
+      MyRepository2,
+    ]),
+  ]
+};
 ```
 
-### Query from repository
+## Usage
+
+### Create a Repository
 
 ```typescript
-import { signal } from '@angular/common';
-import { MyService } from './my-service.service';
+import { Repository } from '@angular-cool/repository';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
-@Component(/*...*/)
-export class MyComponent {
-  private _myService = inject(MyService);
+@Injectable()
+export class MyRepository1<MyItem> extends Repository<MyItem> {
+  private _http = inject(HttpClient);
 
-  private idParam = signal('1');
-
-  protected myItem = this._myService.items.get(this.idParam);
-
-  protected updateItem() {
-    // Update item on the server here
-
-    this._myService.items.reload(this.idParam());
+  public async getOne(id: MyItemID): Observable<MyItem> {
+    return await this._http.get(`https://myapi.com/items/${ id }`);
   }
 }
 ```
 
+### Query from repository
+```typescript
+import { fromRepository } from '@angular-cool/repository';
+import { signal } from '@angular/common';
+
+export class MyComponent {
+  private idParam = signal('1');
+
+  protected myItem = fromRepository(() => MyRepository1.getOne(this.isParam()));
+}
+```
+
+
+
 ## License
 > The MIT License (MIT)
 
-> Copyright (c) 2025 Hacklone
+> Copyright (c) 2024 Hacklone
 > https://github.com/Hacklone
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy

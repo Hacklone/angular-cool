@@ -1,10 +1,10 @@
 {
   "name": "@angular-cool/repository",
-  "description": "Cool stateful signal repository for angular",
-  "version": "21.0.0",
+  "description": "Cool stateful repository for angular",
+  "version": "19.0.0",
   "peerDependencies": {
-    "@angular/common": ">=21.0.0",
-    "@angular/core": ">=21.0.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

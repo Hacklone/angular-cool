@@ -12,8 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "es2020",
-    "moduleResolution": "node",
+    "module": "preserve",
     "importHelpers": true,
     "target": "ES2022",
     "typeRoots": [
