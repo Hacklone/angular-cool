@@ -1,10 +1,12 @@
-import { Resource, Signal } from '@angular/core';
+import { Signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { ResourceCache } from './resource-cache';
 
 const DEFAULT_MAX_AGE = 5 * 60 * 1000;
 
 type CacheKey = string;
+
+export type ReloadableSignal<T> = Signal<T> & { reload: () => Promise<void> };
 
 class ResourceRepository<TParams, TItem> {
   private _cacheStore = new Map<CacheKey, ResourceCache<TItem>>();
@@ -16,10 +18,10 @@ class ResourceRepository<TParams, TItem> {
    * Retrieves a resource cache
    *
    * @param {Signal<TParams>} key - A signal function used to resolve the parameters for retrieving or initializing the resource.
-   * @return {Resource<TItem | undefined>} A read-only resource containing the item associated with the provided key, already cached.
+   * @return {ReloadableSignal<TItem | undefined>} A read-only signal containing the item associated with the provided key, already cached.
    */
-  public get(key: Signal<TParams>): Resource<TItem | undefined> {
-    return rxResource<TItem | undefined, TParams>({
+  public get(key: Signal<TParams>): ReloadableSignal<TItem | undefined> {
+    const resource = rxResource<TItem | undefined, TParams>({
       params: () => key(),
       stream: ({ params }) => {
         const cacheKey = this._createCacheKey(params);
@@ -40,7 +42,15 @@ class ResourceRepository<TParams, TItem> {
 
         return cache.getObservable();
       }
-    }).asReadonly();
+    });
+
+    const resultSignal = resource.asReadonly().value as ReloadableSignal<TItem | undefined>;
+
+    resultSignal.reload = async () => {
+      await this.reload(key());
+    };
+
+    return resultSignal;
   }
 
   /**
