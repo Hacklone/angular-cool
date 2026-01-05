@@ -4,8 +4,10 @@ import { ResourceCache } from './resource-cache';
 
 const DEFAULT_MAX_AGE = 5 * 60 * 1000;
 
+type CacheKey = string;
+
 class ResourceRepository<TParams, TItem> {
-  private _cacheStore = new Map<TParams, ResourceCache<TItem>>();
+  private _cacheStore = new Map<CacheKey, ResourceCache<TItem>>();
 
   constructor(private options: ResourceRepositoryOptions<TParams, TItem>) {
   }
@@ -20,7 +22,9 @@ class ResourceRepository<TParams, TItem> {
     return rxResource<TItem | undefined, TParams>({
       params: () => key(),
       stream: ({ params }) => {
-        let cache = this._cacheStore.get(params);
+        const cacheKey = this._createCacheKey(params);
+
+        let cache = this._cacheStore.get(cacheKey);
 
         if (!cache) {
           cache = new ResourceCache(
@@ -28,7 +32,7 @@ class ResourceRepository<TParams, TItem> {
             this.options.maxAge ?? DEFAULT_MAX_AGE,
           );
 
-          this._cacheStore.set(params, cache);
+          this._cacheStore.set(cacheKey, cache);
         }
 
         // Do not wait for it to load
@@ -47,7 +51,9 @@ class ResourceRepository<TParams, TItem> {
    * @throws {Error} If no cache is found for the provided key or if data loading fails.
    */
   public async reload(key: TParams): Promise<void> {
-    const cache = this._cacheStore.get(key);
+    const cacheKey = this._createCacheKey(key);
+
+    const cache = this._cacheStore.get(cacheKey);
 
     if (!cache) {
       throw new Error(`No cache found for the given key: ${key}`);
@@ -57,24 +63,35 @@ class ResourceRepository<TParams, TItem> {
 
     await cache.keepDataFreshAsync();
   }
+
+  private _createCacheKey(params: TParams): CacheKey {
+    return (this.options.cacheKeyGenerator ?? JSON.stringify)(params) as CacheKey;
+  }
 }
 
 /**
- * Options to configure the behavior of the ResourceRepository.
+ * Configuration options for a ResourceRepository.
+ * This interface provides options for customizing the behavior
+ * of resource loading and caching mechanisms.
  *
- * @template TParams The type of the parameters used by the loader function.
- * @template TItem The type of the items returned by the loader function.
+ * @template TParams The type of the parameters used to load a resource.
+ * @template TItem The type of the items being loaded or cached.
  *
- * @property {function(TParams): Promise<TItem>} loader
- *   A function that loads a resource based on provided parameters and returns a promise that resolves to the resource.
+ * @property loader A function responsible for loading a resource. It receives
+ * parameters of type `TParams` and returns a Promise resolving to an item of type `TItem`.
  *
- * @property {number} [maxAge]
- *   The optional maximum age (in milliseconds) for caching the loaded resource. Default: 5 minutes
+ * @property [maxAge] Optional. Specifies the maximum duration (in milliseconds)
+ * for which a cached resource remains valid. Default: 5 minutes
+ *
+ * @property [cacheKeyGenerator] Optional. A function used to generate a unique
+ * cache key based on the input parameters of type `TParams`. Default: JSON.stringify()
  */
 export interface ResourceRepositoryOptions<TParams, TItem> {
   loader: (params: TParams) => Promise<TItem>;
 
   maxAge?: number;
+
+  cacheKeyGenerator?: (params: TParams) => string;
 }
 
 /**

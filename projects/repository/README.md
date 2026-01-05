@@ -1,14 +1,21 @@
 [npm-url]: https://npmjs.org/package/@angular-cool/repository
+
 [npm-image]: https://img.shields.io/npm/v/@angular-cool/repository.svg
+
 [downloads-image]: https://img.shields.io/npm/dm/@angular-cool/repository.svg
+
 [total-downloads-image]: https://img.shields.io/npm/dt/@angular-cool/repository.svg
 
 # @angular-cool/repository [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url]  [![Total Downloads][total-downloads-image]][npm-url]
+
 Cool stateful signal repository for angular
 
 An easy-to-use signal repository that helps you manage your data loading and caching in your angular applications.
 
+Share data across multiple components and services with automatic reloading and state management.
+
 ## Install
+
 > npm install --save @angular-cool/repository
 
 ## Usage
@@ -18,14 +25,14 @@ An easy-to-use signal repository that helps you manage your data loading and cac
 ```typescript
 import { resourceRepository } from '@angular-cool/repository';
 import { inject, Injectable } from '@angular/core';
-import { ItemId } from './my-item.model';
+import { ItemId, ItemDTO } from './my-item.model';
 
 @Injectable()
 export class MyService {
   private _http = inject(HttpClient);
 
-  private items = resourceRepository<ItemId>({
-    loader: ({ params }) => this._http.get(`https://myapi.com/items/${params}`).toPromise(),
+  private items = resourceRepository<ItemId, ItemDTO>({
+    loader: ({ params }) => this._http.get(`https://myapi.com/items/${ params }`).toPromise(),
   });
 }
 ```
@@ -35,24 +42,26 @@ export class MyService {
 ```typescript
 import { signal } from '@angular/common';
 import { MyService } from './my-service.service';
+import { ItemId, ItemDTO } from './my-item.model';
 
 @Component(/*...*/)
 export class MyComponent {
   private _myService = inject(MyService);
 
-  private idParam = signal('1');
+  private idParam = signal<ItemId>('1' as ItemId);
 
-  protected myItem = this._myService.items.get(this.idParam);
+  protected myItem: Resource<ItemDTO | undefined> = this._myService.items.get(this.idParam);
 
   protected updateItem() {
     // Update item on the server here
 
-    this._myService.items.reload(this.idParam());
+    this._myService.items.reload(this.idParam()); // This reloads the item from the server and updates the signal for all subscribers
   }
 }
 ```
 
 ## License
+
 > The MIT License (MIT)
 
 > Copyright (c) 2025 Hacklone
