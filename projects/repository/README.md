@@ -32,7 +32,7 @@ export class MyService {
   private _http = inject(HttpClient);
 
   private items = resourceRepository<ItemId, ItemDTO>({
-    loader: ({ params }) => this._http.get(`https://myapi.com/items/${ params }`).toPromise(),
+    loader: ({ params }) => this._http.get(`https://myapi.com/items/${params}`).toPromise(),
   });
 }
 ```
@@ -58,6 +58,12 @@ export class MyComponent {
     this._myService.items.reload(this.idParam()); // This reloads the item from the server and updates the signal for all subscribers
   }
 }
+```
+
+### Manually update value if needed
+
+```typescript
+this._myService.items.setValue(this.idParam(), myValue); // Updates the signal for all subscribers
 ```
 
 ## License

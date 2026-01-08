@@ -25,8 +25,12 @@ export class ResourceCache<TItem> {
 
     const data = await this.loader();
 
+    await this.setValueAsync(data);
+  }
+
+  public async setValueAsync(value: TItem | undefined) {
     this._validUntil = Date.now() + this.maxAge;
-    this._subject.next(data);
+    this._subject.next(value);
   }
 
   public invalidate() {

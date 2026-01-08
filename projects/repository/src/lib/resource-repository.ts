@@ -74,6 +74,25 @@ class ResourceRepository<TParams, TItem> {
     await cache.keepDataFreshAsync();
   }
 
+  /**
+   * Sets a value in the cache associated with the given key.
+   *
+   * @param {TParams} key - The unique key used to identify the cache.
+   * @param {TItem} value - The value to be stored in the cache.
+   * @return {Promise<void>} A promise that resolves when the value is successfully set.
+   */
+  public async setValue(key: TParams, value: TItem): Promise<void> {
+    const cacheKey = this._createCacheKey(key);
+
+    let cache = this._cacheStore.get(cacheKey);
+
+    if (!cache) {
+      throw new Error(`No cache found for the given key: ${key}`);
+    }
+
+    await cache.setValueAsync(value);
+  }
+
   private _createCacheKey(params: TParams): CacheKey {
     return (this.options.cacheKeyGenerator ?? JSON.stringify)(params) as CacheKey;
   }
