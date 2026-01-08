@@ -10,4 +10,9 @@ export interface ResourceRepositorySignal<T> extends Signal<T> {
    * Sets current value.
    */
   readonly set: (value: T) => Promise<void>;
+
+  /**
+   * true if resource is currently loading.
+   */
+  readonly isLoading: Signal<boolean>;
 }

@@ -60,12 +60,22 @@ export class MyComponent {
 }
 ```
 
+### Show loading indicator
+
+```html
+@if (myItem.isLoading()) {
+  <div>Loading</div>
+}
+```
+
 ### Manually update value if needed
 
 ```typescript
 this.myItem.set(newValue); // Updates the signal for all subscribers
 ```
-OR 
+
+OR
+
 ```typescript
 await this._myService.items.setValue(this.idParam(), myValue); // Updates the signal for all subscribers
 ```
@@ -81,7 +91,7 @@ const value = await this._myService.items.getValue(this.idParam());
 ```typescript
 await this._myService.items.updateValue(this.idParam(), val => {
   // modify val
-  
+
   return val;
 });
 ```

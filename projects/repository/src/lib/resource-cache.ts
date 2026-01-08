@@ -22,6 +22,10 @@ export class ResourceCache<TItem> {
     return this._valueSubject.asObservable();
   }
 
+  public isLoadingObservable() {
+    return this._isLoadingSubject.asObservable();
+  }
+
   public async keepDataFreshAsync() {
     if (!this.isInvalid) {
       return;
