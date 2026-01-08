@@ -1,7 +1,7 @@
 {
   "name": "@angular-cool/repository",
   "description": "Cool stateful signal repository for angular",
-  "version": "21.0.4",
+  "version": "21.0.5",
   "peerDependencies": {
     "@angular/common": ">=21.0.0",
     "@angular/core": ">=21.0.0"

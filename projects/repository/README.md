@@ -52,10 +52,10 @@ export class MyComponent {
 
   protected myItem: Resource<ItemDTO | undefined> = this._myService.items.get(this.idParam);
 
-  protected updateItem() {
+  protected async updateItem() {
     // Update item on the server here
 
-    this._myService.items.reload(this.idParam()); // This reloads the item from the server and updates the signal for all subscribers
+    await this._myService.items.reload(this.idParam()); // This reloads the item from the server and updates the signal for all subscribers
   }
 }
 ```
@@ -63,7 +63,23 @@ export class MyComponent {
 ### Manually update value if needed
 
 ```typescript
-this._myService.items.setValue(this.idParam(), myValue); // Updates the signal for all subscribers
+await this._myService.items.setValue(this.idParam(), myValue); // Updates the signal for all subscribers
+```
+
+### Manually get value if needed
+
+```typescript
+const value = await this._myService.items.getValue(this.idParam());
+```
+
+### Manually update value if needed
+
+```typescript
+await this._myService.items.updateValue(this.idParam(), val => {
+  // modify val
+  
+  return val;
+});
 ```
 
 ## License

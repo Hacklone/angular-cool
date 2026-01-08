@@ -75,10 +75,30 @@ class ResourceRepository<TParams, TItem> {
   }
 
   /**
-   * Sets a value in the cache associated with the given key.
+   * Retrieves a value from the cache associated with the specified key.
+   *
+   * @param {TParams} key - The key used to identify the cache entry.
+   * @return {Promise<TItem | undefined>} A promise that resolves with the retrieved value
+   * or undefined if the value does not exist.
+   * @throws {Error} If no cache is found for the given key.
+   */
+  public async getValue(key: TParams): Promise<TItem | undefined> {
+    const cacheKey = this._createCacheKey(key);
+
+    const cache = this._cacheStore.get(cacheKey);
+
+    if (!cache) {
+      throw new Error(`No cache found for the given key: ${key}`);
+    }
+
+    return await cache.getValueAsync();
+  }
+
+  /**
+   * Sets a value in the cache associated with the given key and update all value subscribers
    *
    * @param {TParams} key - The unique key used to identify the cache.
-   * @param {TItem} value - The value to be stored in the cache.
+   * @param {TItem} value - The value to be stored in the cache
    * @return {Promise<void>} A promise that resolves when the value is successfully set.
    */
   public async setValue(key: TParams, value: TItem): Promise<void> {
@@ -91,6 +111,19 @@ class ResourceRepository<TParams, TItem> {
     }
 
     await cache.setValueAsync(value);
+  }
+
+  /**
+   * Updates the value associated with the given key by applying an update function and update all value subscribers
+   *
+   * @param {TParams} key - The key whose value needs to be updated.
+   * @param {function(value: TItem | undefined): Promise<TItem>} updateFn - An asynchronous function that takes the current value (or undefined if not present) and returns the updated value.
+   * @return {Promise<void>} A promise that resolves when the update operation is complete.
+   */
+  public async updateValue(key: TParams, updateFn: (value: TItem | undefined) => Promise<TItem>): Promise<void> {
+    const value = await this.getValue(key);
+
+    await this.setValue(key, await updateFn(value));
   }
 
   private _createCacheKey(params: TParams): CacheKey {

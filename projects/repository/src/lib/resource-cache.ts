@@ -1,4 +1,4 @@
-import { ReplaySubject } from 'rxjs';
+import { firstValueFrom, ReplaySubject } from 'rxjs';
 
 export class ResourceCache<TItem> {
   private _subject = new ReplaySubject<TItem | undefined>();
@@ -31,6 +31,12 @@ export class ResourceCache<TItem> {
   public async setValueAsync(value: TItem | undefined) {
     this._validUntil = Date.now() + this.maxAge;
     this._subject.next(value);
+  }
+
+  public async getValueAsync(): Promise<TItem | undefined> {
+    await this.keepDataFreshAsync();
+
+    return firstValueFrom(this._subject);
   }
 
   public invalidate() {
