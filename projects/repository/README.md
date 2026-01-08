@@ -42,7 +42,7 @@ export class MyService {
 ```typescript
 import { signal } from '@angular/common';
 import { MyService } from './my-service.service';
-import { ItemId, ItemDTO } from './my-item.model';
+import { ItemDTO, ItemId } from './my-item.model';
 
 @Component(/*...*/)
 export class MyComponent {
@@ -55,13 +55,17 @@ export class MyComponent {
   protected async updateItem() {
     // Update item on the server here
 
-    await this._myService.items.reload(this.idParam()); // This reloads the item from the server and updates the signal for all subscribers
+    await this.myItem.reload(); // This reloads the item from the server and updates the signal for all subscribers
   }
 }
 ```
 
 ### Manually update value if needed
 
+```typescript
+this.myItem.set(newValue); // Updates the signal for all subscribers
+```
+OR 
 ```typescript
 await this._myService.items.setValue(this.idParam(), myValue); // Updates the signal for all subscribers
 ```

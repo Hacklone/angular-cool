@@ -1,7 +1,11 @@
-import { firstValueFrom, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, ReplaySubject } from 'rxjs';
 
 export class ResourceCache<TItem> {
-  private _subject = new ReplaySubject<TItem | undefined>();
+  private _valueSubject = new ReplaySubject<TItem | undefined>(1);
+
+  private _isLoading = false;
+  private _isLoadingSubject = new BehaviorSubject<boolean>(false);
+
   private _validUntil: number | null = null;
 
   public get isInvalid(): boolean {
@@ -14,8 +18,8 @@ export class ResourceCache<TItem> {
   ) {
   }
 
-  public getObservable() {
-    return this._subject.asObservable();
+  public getValueObservable() {
+    return this._valueSubject.asObservable();
   }
 
   public async keepDataFreshAsync() {
@@ -23,23 +27,44 @@ export class ResourceCache<TItem> {
       return;
     }
 
-    const data = await this.loader();
+    await this._reloadValueAsync();
+  }
 
-    await this.setValueAsync(data);
+  private async _reloadValueAsync(): Promise<void> {
+    if (this._isLoading) {
+      await firstValueFrom(this._isLoadingSubject);
+
+      return;
+    }
+
+    this._setIsLoading(true);
+
+    try {
+      const data = await this.loader();
+
+      await this.setValueAsync(data);
+    } finally {
+      this._setIsLoading(false);
+    }
   }
 
   public async setValueAsync(value: TItem | undefined) {
     this._validUntil = Date.now() + this.maxAge;
-    this._subject.next(value);
+    this._valueSubject.next(value);
   }
 
   public async getValueAsync(): Promise<TItem | undefined> {
     await this.keepDataFreshAsync();
 
-    return firstValueFrom(this._subject);
+    return firstValueFrom(this._valueSubject);
   }
 
   public invalidate() {
     this._validUntil = null;
+  }
+
+  private _setIsLoading(isLoading: boolean) {
+    this._isLoading = isLoading;
+    this._isLoadingSubject.next(isLoading);
   }
 }
