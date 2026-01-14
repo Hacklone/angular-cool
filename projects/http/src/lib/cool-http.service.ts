@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 
 import { HttpHeader } from './http-header.model';
 import { CookieStore } from './cookie-store.service';
@@ -289,9 +289,9 @@ export class CoolHttp {
 
   private _modifyOptions(options: RequestOptions): AngularRequestOptions {
     const resultOptions: AngularRequestOptions = {
-      headers: options.headers || new HttpHeaders(),
+      headers: options.headers ? ((options.headers instanceof HttpHeaders) ? options.headers : clearUndefinedParams(options.headers)) : new HttpHeaders(),
       observe: 'response',
-      params: options.params,
+      params: options.params ? (options.params instanceof HttpParams ? options.params : clearUndefinedParams(options.params)) : undefined,
       reportProgress: options.reportProgress,
       responseType: 'text',
       withCredentials: options.withCredentials || this._withCredentials,
@@ -304,6 +304,14 @@ export class CoolHttp {
     resultOptions.headers = this._tryAppendRegisteredCookiesToCustomHeaders(<HttpHeaders> resultOptions.headers);
 
     return resultOptions;
+
+    function clearUndefinedParams(params: Record<string, string | string[] | undefined> | undefined): Record<string, string | string[]> | undefined {
+      if (!params) {
+        return undefined;
+      }
+
+      return <Record<string, string | string[]>> Object.fromEntries(Object.entries(params).filter(([key, value]) => value !== undefined));
+    }
   }
 
   private _appendGlobalHeaders(headers: HttpHeaders): HttpHeaders {
