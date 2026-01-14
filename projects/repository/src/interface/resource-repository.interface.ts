@@ -11,6 +11,14 @@ export interface ResourceRepository<TParams, TItem> {
   get(key: Signal<TParams>): ResourceRepositorySignal<TItem | undefined>;
 
   /**
+   * Remove a resource cache
+   *
+   * @param {TParams} key - The key used to identify the specific cache entry to reload.
+   * @return {Promise<void>} A promise that resolves when the cache has been refreshed.
+   */
+  remove(key: TParams): Promise<void>;
+
+  /**
    * Reloads the cache associated with the given key, ensuring it is updated with fresh data.
    *
    * @param {TParams} key - The key used to identify the specific cache entry to reload.

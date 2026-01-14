@@ -64,7 +64,7 @@ export class MyComponent {
 
 ```html
 @if (myItem.isLoading()) {
-  <div>Loading</div>
+<div>Loading</div>
 }
 ```
 
@@ -94,6 +94,12 @@ await this._myService.items.updateValue(this.idParam(), val => {
 
   return val;
 });
+```
+
+### Remove value
+
+```typescript
+await this._myService.items.remove(this.idParam());
 ```
 
 ## License

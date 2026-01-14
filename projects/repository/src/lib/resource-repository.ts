@@ -64,8 +64,28 @@ export class ResourceRepositoryImpl<TParams, TItem> implements ResourceRepositor
       set: async (value: TItem | undefined) => {
         await this.setValue(key(), value as TItem);
       },
+      update: async (valueUpdater: (currentValue: TItem | undefined) => Promise<TItem | undefined>) => {
+        await this.updateValue(key(), valueUpdater);
+      },
+      remove: async () => {
+        await this.remove(key());
+      },
       isLoading: computed<boolean>(() => isLoadingSignal() ?? true),
     } satisfies Omit<ResourceRepositorySignal<TItem | undefined>, keyof Signal<TItem | undefined>>);
+  }
+
+  public async remove(key: TParams): Promise<void> {
+    const cacheKey = this._createCacheKey(key);
+
+    const cache = this._cacheStore.get(cacheKey);
+
+    if (!cache) {
+      throw new Error(`No cache found for the given key: ${key}`);
+    }
+
+    await cache.removeAsync();
+
+    this._cacheStore.delete(cacheKey);
   }
 
   public async reload(key: TParams): Promise<void> {
@@ -94,7 +114,7 @@ export class ResourceRepositoryImpl<TParams, TItem> implements ResourceRepositor
     return await cache.getValueAsync();
   }
 
-  public async setValue(key: TParams, value: TItem): Promise<void> {
+  public async setValue(key: TParams, value: TItem | undefined): Promise<void> {
     const cacheKey = this._createCacheKey(key);
 
     let cache = this._cacheStore.get(cacheKey);
@@ -106,7 +126,7 @@ export class ResourceRepositoryImpl<TParams, TItem> implements ResourceRepositor
     await cache.setValueAsync(value);
   }
 
-  public async updateValue(key: TParams, updateFn: (value: TItem | undefined) => Promise<TItem>): Promise<void> {
+  public async updateValue(key: TParams, updateFn: (value: TItem | undefined) => Promise<TItem | undefined>): Promise<void> {
     const value = await this.getValue(key);
 
     await this.setValue(key, await updateFn(value));

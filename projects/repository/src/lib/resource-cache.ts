@@ -67,6 +67,13 @@ export class ResourceCache<TItem> {
     this._validUntil = null;
   }
 
+  public async removeAsync() {
+    await this.setValueAsync(undefined);
+
+    this._valueSubject.complete();
+    this._isLoadingSubject.complete();
+  }
+
   private _setIsLoading(isLoading: boolean) {
     this._isLoading = isLoading;
     this._isLoadingSubject.next(isLoading);

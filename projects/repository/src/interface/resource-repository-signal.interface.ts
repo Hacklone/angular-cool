@@ -9,7 +9,17 @@ export interface ResourceRepositorySignal<T> extends Signal<T> {
   /**
    * Sets current value.
    */
-  readonly set: (value: T) => Promise<void>;
+  readonly set: (value: T | undefined) => Promise<void>;
+
+  /**
+   * Updates current value.
+   */
+  readonly update: (valueUpdater: (current: T | undefined) => Promise<T | undefined>) => Promise<void>;
+
+  /**
+   * Removes current resource
+   */
+  readonly remove: () => Promise<void>;
 
   /**
    * true if resource is currently loading.
