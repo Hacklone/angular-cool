@@ -10,7 +10,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/storage/tsconfig.lib.json",
             "project": "projects/storage/ng-package.json"
@@ -22,7 +22,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/storage/src/test.ts",
             "tsConfig": "projects/storage/tsconfig.spec.json",
@@ -38,7 +38,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/dialogs/tsconfig.lib.json",
             "project": "projects/dialogs/ng-package.json"
@@ -50,7 +50,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/dialogs/src/test.ts",
             "tsConfig": "projects/dialogs/tsconfig.spec.json",
@@ -66,7 +66,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/collapsed-container/tsconfig.lib.json",
             "project": "projects/collapsed-container/ng-package.json"
@@ -78,7 +78,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/collapsed-container/src/test.ts",
             "tsConfig": "projects/collapsed-container/tsconfig.spec.json",
@@ -94,7 +94,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/http/tsconfig.lib.json",
             "project": "projects/http/ng-package.json"
@@ -106,7 +106,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/http/src/test.ts",
             "tsConfig": "projects/http/tsconfig.spec.json",
@@ -122,7 +122,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/inline-edit-field/tsconfig.lib.json",
             "project": "projects/inline-edit-field/ng-package.json"
@@ -134,7 +134,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/inline-edit-field/src/test.ts",
             "tsConfig": "projects/inline-edit-field/tsconfig.spec.json",
@@ -150,7 +150,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/loading-button/tsconfig.lib.json",
             "project": "projects/loading-button/ng-package.json"
@@ -162,7 +162,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/loading-button/src/test.ts",
             "tsConfig": "projects/loading-button/tsconfig.spec.json",
@@ -178,7 +178,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/social-login-buttons/tsconfig.lib.json",
             "project": "projects/social-login-buttons/ng-package.json"
@@ -190,7 +190,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/social-login-buttons/src/test.ts",
             "tsConfig": "projects/social-login-buttons/tsconfig.spec.json",
@@ -206,7 +206,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/loading-indicator/tsconfig.lib.json",
             "project": "projects/loading-indicator/ng-package.json"
@@ -218,7 +218,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/loading-indicator/src/test.ts",
             "tsConfig": "projects/loading-indicator/tsconfig.spec.json",
@@ -234,7 +234,7 @@
       "prefix": "cool",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/virtual-grid/tsconfig.lib.json",
             "project": "projects/virtual-grid/ng-package.json"
@@ -246,7 +246,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "main": "projects/virtual-grid/src/test.ts",
             "tsConfig": "projects/virtual-grid/tsconfig.spec.json",
@@ -262,7 +262,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/repository/ng-package.json"
           },
@@ -277,7 +277,7 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/repository/tsconfig.spec.json",
             "polyfills": [

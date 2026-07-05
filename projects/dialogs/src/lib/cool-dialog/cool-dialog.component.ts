@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CoolDialogResult } from '../cool-dialog-result.interface';
 import { CoolDialogButtonColors, CoolDialogConfig } from '../cool-dialog-config.interface';
@@ -13,6 +13,7 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
   templateUrl: './cool-dialog.component.html',
   styleUrls: ['./cool-dialog.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     MatCheckboxModule,
     FormsModule,

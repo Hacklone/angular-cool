@@ -10,7 +10,6 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "preserve",
     "importHelpers": true,

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { CoolHttp, HttpHeader, IRequestInterceptor, IResponseInterceptor } from '@angular-cool/http';
 
@@ -6,6 +6,7 @@ const DEFAULT_INDICATOR_DELAY = 500;
 
 @Component({
   selector: 'cool-loading-indicator',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div *ngIf="showIndicator" class="cool-loading-indicator">
       <ng-content></ng-content>

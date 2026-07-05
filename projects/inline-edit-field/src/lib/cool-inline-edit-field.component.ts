@@ -9,6 +9,7 @@ import {
   Input,
   OnDestroy,
   Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
@@ -20,6 +21,7 @@ import { CoolInlineEditFieldInputDirective } from './cool-inline-edit-field-inpu
   selector: 'cool-inline-edit-field',
   templateUrl: './cool-inline-edit-field.component.html',
   styleUrls: ['./cool-inline-edit-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
