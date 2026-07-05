@@ -1,6 +1,6 @@
 {
   "name": "@angular-cool/inline-edit-field",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "description": "Cool inline edit field for angular",
   "peerDependencies": {
     "@angular/common": ">=10.0.0",
