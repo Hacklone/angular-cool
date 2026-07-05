@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 
 import { HttpHeader } from './http-header.model';
 import { CookieStore } from './cookie-store.service';
@@ -194,8 +194,8 @@ export class CoolHttp {
       }
 
       response = actionResponse;
-    } catch (errorResponse) {
-      response = errorResponse;
+    } catch (errorResponse: unknown) {
+      response = this._toHttpResponse(errorResponse, url);
     }
 
     shouldIntercept = await this._invokeResponseInterceptorsAsync(response, url, method, data, clientHeaders);
@@ -217,6 +217,36 @@ export class CoolHttp {
     }
 
     return <T> returnValue;
+  }
+
+  private _toHttpResponse(error: unknown, fallbackUrl: string): HttpResponse<string> {
+    if (error instanceof HttpResponse) {
+      return error as HttpResponse<string>;
+    }
+
+    if (error instanceof HttpErrorResponse) {
+      return new HttpResponse<string>({
+        body: this._stringifyErrorBody(error.error),
+        headers: error.headers,
+        status: error.status,
+        statusText: error.statusText || 'Unknown Error',
+        url: error.url || fallbackUrl
+      });
+    }
+
+    throw error instanceof Error ? error : new Error('Unknown HTTP error');
+  }
+
+  private _stringifyErrorBody(body: unknown): string {
+    if (typeof body === 'string') {
+      return body;
+    }
+
+    try {
+      return JSON.stringify(body);
+    } catch {
+      return String(body);
+    }
   }
 
   public getObservable<T = any>(url: string, options: RequestOptions = DEFAULT_REQUEST_OPTIONS): Observable<T> {

@@ -6,6 +6,7 @@ const DEFAULT_INDICATOR_DELAY = 500;
 
 @Component({
   selector: 'cool-loading-indicator',
+  standalone: false,
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div *ngIf="showIndicator" class="cool-loading-indicator">

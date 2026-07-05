@@ -23,6 +23,7 @@ const MILLISECONDS_TO_WAIT_ON_WINDOW_RESIZE_BEFORE_RENDERING = 200;
 
 @Component({
   selector: 'cool-virtual-grid',
+  standalone: false,
   template: '<div class="cool-virtual-grid"></div>',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`

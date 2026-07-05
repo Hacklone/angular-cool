@@ -19,6 +19,7 @@ import { CoolInlineEditFieldInputDirective } from './cool-inline-edit-field-inpu
 
 @Component({
   selector: 'cool-inline-edit-field',
+  standalone: false,
   templateUrl: './cool-inline-edit-field.component.html',
   styleUrls: ['./cool-inline-edit-field.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,

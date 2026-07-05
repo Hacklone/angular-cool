@@ -1,13 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": "./projects",
     "outDir": "./dist/out-tsc",
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
+    "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
@@ -23,37 +24,37 @@
     ],
     "paths": {
       "storage": [
-        "dist/storage/storage",
-        "dist/storage"
+        "./dist/storage/storage",
+        "./dist/storage"
       ],
       "dialogs": [
-        "dist/dialogs/dialogs",
-        "dist/dialogs"
+        "./dist/dialogs/dialogs",
+        "./dist/dialogs"
       ],
       "http": [
-        "dist/http/http",
-        "dist/http"
+        "./dist/http/http",
+        "./dist/http"
       ],
       "inline-edit-field": [
-        "dist/inline-edit-field/inline-edit-field",
-        "dist/inline-edit-field"
+        "./dist/inline-edit-field/inline-edit-field",
+        "./dist/inline-edit-field"
       ],
       "repository": [
         "./dist/repository"
       ],
       "loading-indicator": [
-        "dist/loading-indicator/loading-indicator",
-        "dist/loading-indicator"
+        "./dist/loading-indicator/loading-indicator",
+        "./dist/loading-indicator"
       ],
       "virtual-grid": [
-        "dist/virtual-grid/virtual-grid",
-        "dist/virtual-grid"
+        "./dist/virtual-grid/virtual-grid",
+        "./dist/virtual-grid"
       ]
     },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
+    "strictTemplates": true,
     "strictInjectionParameters": true
   }
 }

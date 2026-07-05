@@ -1,7 +1,8 @@
 import { Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[coolInlineEditFieldInput]'
+  selector: '[coolInlineEditFieldInput]',
+  standalone: false
 })
 export class CoolInlineEditFieldInputDirective {
   constructor(elementRef: ElementRef) {
